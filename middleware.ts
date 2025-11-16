@@ -17,7 +17,14 @@ export function middleware(request: NextRequest) {
 
   if (!token) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith('/dashboard')) {
+    const protectedPaths = [
+      '/dashboard',
+      '/introduce-product',
+      '/settings-message',
+      '/messages',
+    ];
+
+    if (protectedPaths.some((path) => url.pathname.startsWith(path))) {
       const targetUrl = new URL(request.url);
       targetUrl.pathname = '/';
       return NextResponse.redirect(targetUrl);
@@ -28,5 +35,12 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login/:path*', '/dashboard/:path*', '/:path*'],
+  matcher: [
+    '/login/:path*',
+    '/dashboard/:path*',
+    '/introduce-product/:path*',
+    '/settings-message/:path*',
+    '/messages/:path*',
+    '/:path*',
+  ],
 };

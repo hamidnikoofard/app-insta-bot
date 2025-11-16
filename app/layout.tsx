@@ -3,6 +3,7 @@ import './globals.css';
 
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import QueryProvider from './QueryProvider';
 
 export const metadata: Metadata = {
   title: 'Insta Bot - ربات اینستاگرام',
@@ -36,7 +37,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider>
-          {children}
+          <QueryProvider>{children}</QueryProvider>
           <Toaster />
         </ThemeProvider>
       </body>

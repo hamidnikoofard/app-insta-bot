@@ -14,16 +14,14 @@ export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
     switch (pathName) {
       case '/dashboard':
         return 'داشبورد';
+      case '/products':
+        return 'محصولات';
+      case '/settings-message':
+        return 'تنظیمات پیام';
+      case '/messages':
+        return 'پیام ها';
       case '/profile':
         return 'پروفایل';
-      case '/projects':
-        return 'پروژه‌ها';
-      case '/analytics':
-        return 'آمار و گزارش';
-      case '/notifications':
-        return 'اعلان‌ها';
-      case '/settings':
-        return 'تنظیمات';
       default:
         return 'داشبورد';
     }

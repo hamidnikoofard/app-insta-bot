@@ -1,7 +1,11 @@
-import React from 'react';
+import { ConnectInstagramForm } from './components/ConnectInstagramForm';
 
-function page() {
-  return <div className="">page</div>;
+function Page() {
+  return (
+    <div>
+      <ConnectInstagramForm />
+    </div>
+  );
 }
 
-export default page;
+export default Page;

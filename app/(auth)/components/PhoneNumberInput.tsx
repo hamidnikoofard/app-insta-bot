@@ -1,7 +1,6 @@
 'use client';
 import { Input, Label } from '@/components/ui';
 import { UseFormRegisterReturn, FieldError } from 'react-hook-form';
-import { useEffect, useRef } from 'react';
 
 interface PhoneNumberInputProps {
   id?: string;
@@ -20,7 +19,6 @@ export function PhoneNumberInput({
   error,
   ariaLabel = 'شماره تلفن خود را وارد کنید',
 }: PhoneNumberInputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
   const { ref, onChange, onBlur, name } = register;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,16 +41,6 @@ export function PhoneNumberInput({
     }
   };
 
-  // ترکیب ref ها
-  useEffect(() => {
-    if (typeof ref === 'function') {
-      ref(inputRef.current);
-    } else if (ref) {
-      (ref as React.MutableRefObject<HTMLInputElement | null>).current =
-        inputRef.current;
-    }
-  }, [ref]);
-
   return (
     <div>
       <Label
@@ -71,7 +59,7 @@ export function PhoneNumberInput({
         onChange={handleInputChange}
         onBlur={onBlur}
         name={name}
-        ref={inputRef}
+        ref={ref}
       />
       {error && (
         <p className="text-sm text-destructive mt-0.5">{error.message}</p>

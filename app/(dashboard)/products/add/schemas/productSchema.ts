@@ -1,0 +1,11 @@
+import { z } from 'zod';
+
+const productSchema = z.object({
+  name: z.string().min(1, { message: 'نام محصول الزامی است' }),
+  description: z.string().min(1, { message: 'توضیحات الزامی است' }),
+  primary_cost: z.string().min(1, { message: 'قیمت اولیه الزامی است' }),
+  final_cost: z.string().optional(),
+  //   images: z.array(z.string()).min(1, { message: 'تصاویر الزامی است' }),
+});
+
+export default productSchema;

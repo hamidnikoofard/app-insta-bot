@@ -7,6 +7,14 @@ interface SidebarNavProps {
 }
 
 export function SidebarNav({ pathname, isOpen }: SidebarNavProps) {
+  const isItemActive = (itemHref: string) => {
+    // اگر pathname دقیقاً برابر item.href باشد
+    if (pathname === itemHref) return true;
+    // اگر pathname با item.href شروع شود (برای nested routes)
+    if (pathname.startsWith(itemHref + '/')) return true;
+    return false;
+  };
+
   return (
     <div className="flex-1 overflow-y-auto overflow-x-hidden py-4">
       <nav className="flex flex-col gap-1 px-2">
@@ -14,7 +22,7 @@ export function SidebarNav({ pathname, isOpen }: SidebarNavProps) {
           <NavItemComponent
             key={item.href}
             item={item}
-            isActive={pathname === item.href}
+            isActive={isItemActive(item.href)}
             isOpen={isOpen}
           />
         ))}

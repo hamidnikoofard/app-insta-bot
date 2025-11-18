@@ -1,19 +1,37 @@
 'use client';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BottomNavigationBar,
   ContentHeader,
   SidebarNavigation,
 } from './components';
 
+const SIDEBAR_STATE_KEY = 'sidebar-is-open';
+
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  // استفاده از lazy initialization برای خواندن از localStorage
+  const [isOpen, setIsOpen] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    const savedState = localStorage.getItem(SIDEBAR_STATE_KEY);
+    if (savedState !== null) {
+      try {
+        return JSON.parse(savedState);
+      } catch (error: unknown) {
+        return true;
+      }
+    }
+    return true;
+  });
   const pathname = usePathname();
+
+  useEffect(() => {
+    localStorage.setItem(SIDEBAR_STATE_KEY, JSON.stringify(isOpen));
+  }, [isOpen]);
 
   return (
     <div className="min-h-screen bg-background">

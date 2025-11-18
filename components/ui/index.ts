@@ -3,3 +3,8 @@ export { Input } from './input';
 export { Toaster } from './sonner';
 export { Label } from './label';
 export { Container } from './container';
+export { Dialog } from './dialog';
+export { Skeleton } from './skeleton';
+export { ErrorDisplay } from './error-display';
+export { Loading } from './loading';
+export { Textarea } from './textarea';

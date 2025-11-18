@@ -1,7 +1,9 @@
 'use client';
+import { useState, useEffect, startTransition } from 'react';
 import { Button } from '@/components/ui';
-import { BellIcon, MenuIcon, X } from 'lucide-react';
+import { BellIcon, MenuIcon, X, Moon, Sun } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface ContentHeaderProps {
   isOpen: boolean;
@@ -10,18 +12,32 @@ interface ContentHeaderProps {
 
 export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
   const pathName = usePathname();
+  const { theme, toggleTheme } = useTheme();
+  // برای جلوگیری از hydration mismatch
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    startTransition(() => {
+      setMounted(true);
+    });
+  }, []);
+
   const setTitle = () => {
+    if (pathName.startsWith('/products')) {
+      return 'محصولات';
+    }
+    if (pathName.startsWith('/settings-message')) {
+      return 'تنظیمات پیام';
+    }
+    if (pathName.startsWith('/messages')) {
+      return 'پیام ها';
+    }
+    if (pathName.startsWith('/profile')) {
+      return 'پروفایل';
+    }
     switch (pathName) {
       case '/dashboard':
         return 'داشبورد';
-      case '/products':
-        return 'محصولات';
-      case '/settings-message':
-        return 'تنظیمات پیام';
-      case '/messages':
-        return 'پیام ها';
-      case '/profile':
-        return 'پروفایل';
       default:
         return 'داشبورد';
     }
@@ -52,6 +68,21 @@ export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
             <span className="text-sm font-medium ">حمید نیکوفرد</span>
           </div>
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="h-9 w-9 hover:bg-accent/50 transition-colors"
+              suppressHydrationWarning
+            >
+              {!mounted ? (
+                <Moon className="h-4 w-4" />
+              ) : theme === 'dark' ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
             <Button variant="ghost" size="icon">
               <BellIcon className="h-4 w-4" />
             </Button>

@@ -34,7 +34,7 @@ export const loginAction = async (data: LoginFormData) => {
   } catch (error) {
     return {
       success: false,
-      message: 'ورود با موفقیت انجام شد' + error,
+      message: 'شماره تلفن یا پسورد اشتباه است',
     };
   }
 };

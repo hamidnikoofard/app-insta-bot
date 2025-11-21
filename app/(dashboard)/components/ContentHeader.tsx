@@ -1,5 +1,4 @@
 'use client';
-import { useState, useEffect, startTransition } from 'react';
 import { Button } from '@/components/ui';
 import { BellIcon, MenuIcon, X, Moon, Sun } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -13,14 +12,6 @@ interface ContentHeaderProps {
 export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
   const pathName = usePathname();
   const { theme, toggleTheme } = useTheme();
-  // برای جلوگیری از hydration mismatch
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    startTransition(() => {
-      setMounted(true);
-    });
-  }, []);
 
   const setTitle = () => {
     if (pathName.startsWith('/products')) {
@@ -75,7 +66,7 @@ export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
               className="h-9 w-9 hover:bg-accent/50 transition-colors"
               suppressHydrationWarning
             >
-              {!mounted ? (
+              {theme === 'light' ? (
                 <Moon className="h-4 w-4" />
               ) : theme === 'dark' ? (
                 <Sun className="h-4 w-4" />

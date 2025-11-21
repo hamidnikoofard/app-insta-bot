@@ -53,7 +53,7 @@ export function BasicInformationSection({
         <Textarea
           id="description"
           placeholder="توضیحات کامل محصول را وارد کنید..."
-          rows={4}
+          rows={8}
           {...register('description')}
           className={cn(
             'resize-none',

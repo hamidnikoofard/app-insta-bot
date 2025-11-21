@@ -38,9 +38,6 @@ export function useProductSubmit(productId: string | null) {
         );
       }
 
-      // Invalidate cache برای به‌روزرسانی لیست محصولات و محصول خاص
-      // این باعث می‌شود که query ها به عنوان stale علامت‌گذاری شوند
-      // و هنگام بازگشت به صفحه products، به صورت خودکار refetch شوند
       queryClient.invalidateQueries({ queryKey: ['products'] });
       if (productId) {
         queryClient.invalidateQueries({ queryKey: ['product', productId] });

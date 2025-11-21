@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import {
@@ -14,24 +15,41 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // استفاده از lazy initialization برای خواندن از localStorage
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window === 'undefined') return true;
+  // ابتدا یک مقدار ثابت و قابل پیش‌بینی برای SSR
+  const [isOpen, setIsOpen] = useState(true);
+
+  // فقط بعد از mount مقدار localStorage اعمال می‌شود
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
     const savedState = localStorage.getItem(SIDEBAR_STATE_KEY);
     if (savedState !== null) {
       try {
-        return JSON.parse(savedState);
-      } catch (error: unknown) {
-        return true;
+        setIsOpen(JSON.parse(savedState));
+      } catch {
+        setIsOpen(true);
       }
     }
-    return true;
-  });
+  }, []);
+
+  // ذخیره‌سازیِ تغییرات
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem(SIDEBAR_STATE_KEY, JSON.stringify(isOpen));
+    }
+  }, [isOpen, mounted]);
+
   const pathname = usePathname();
 
-  useEffect(() => {
-    localStorage.setItem(SIDEBAR_STATE_KEY, JSON.stringify(isOpen));
-  }, [isOpen]);
+  // جلوگیری از hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-background">
+        {/* یک اسکلت خیلی سبک می‌تونی بذاری یا خالی بذار */}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

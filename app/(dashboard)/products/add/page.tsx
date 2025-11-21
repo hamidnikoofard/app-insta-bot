@@ -1,10 +1,12 @@
 'use client';
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useProductForm } from './hooks/useProductForm';
-import { useProductFetch } from './hooks/useProductFetch';
-import { useProductSubmit } from './hooks/useProductSubmit';
-import { useImageManager } from './hooks/useImageManager';
+import {
+  useProductForm,
+  useProductFetch,
+  useProductSubmit,
+  useImageManager,
+} from './hooks';
 import {
   PageHeader,
   BasicInformationSection,

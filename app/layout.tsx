@@ -4,10 +4,16 @@ import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import QueryProvider from './QueryProvider';
+import InstallPrompt from './(dashboard)/components/InstallPrompt';
 
 export const metadata: Metadata = {
   title: 'Insta Bot - ربات اینستاگرام',
   description: 'پلتفرم حرفه‌ای برای مدیریت و رشد حساب‌های اینستاگرام',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/Logo.png',
+    apple: '/Logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +45,7 @@ export default function RootLayout({
         <ThemeProvider>
           <QueryProvider>{children}</QueryProvider>
           <Toaster />
+          <InstallPrompt />
         </ThemeProvider>
       </body>
     </html>

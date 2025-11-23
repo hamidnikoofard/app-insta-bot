@@ -1,9 +1,16 @@
 import type { NextConfig } from 'next';
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+});
 
+// تمام تنظیمات فقط در یک آبجکت واحد
 const nextConfig: NextConfig = {
-  /* config options here */
-  // مجاز کردن درخواست‌های cross-origin در محیط توسعه
+  reactStrictMode: true,
+
+  // تنظیمات مخصوص توسعه
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

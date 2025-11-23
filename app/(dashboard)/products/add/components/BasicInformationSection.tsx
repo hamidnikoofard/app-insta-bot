@@ -9,7 +9,7 @@ interface BasicInformationSectionProps {
   errors: FieldErrors<ProductFormData>;
 }
 
-export function BasicInformationSection({
+function BasicInformationSection({
   register,
   errors,
 }: BasicInformationSectionProps) {
@@ -72,3 +72,5 @@ export function BasicInformationSection({
     </div>
   );
 }
+
+export { BasicInformationSection };

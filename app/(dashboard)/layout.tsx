@@ -1,5 +1,4 @@
 'use client';
-
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import {
@@ -7,7 +6,7 @@ import {
   ContentHeader,
   SidebarNavigation,
 } from './components';
-import { AuthProvider } from '@/contexts/AuthProvider';
+import { AuthProvider } from '@/contexts';
 
 const SIDEBAR_STATE_KEY = 'sidebar-is-open';
 

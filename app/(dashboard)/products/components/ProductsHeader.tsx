@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui';
 import { Plus } from 'lucide-react';
 
-export function ProductsHeader() {
+function ProductsHeader() {
   return (
     <div className="flex justify-between items-center flex-wrap gap-4">
       <div className="flex-1 min-w-[200px]">
@@ -17,3 +17,5 @@ export function ProductsHeader() {
     </div>
   );
 }
+
+export { ProductsHeader };

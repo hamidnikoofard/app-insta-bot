@@ -1,5 +1,4 @@
 import { X } from 'lucide-react';
-import { memo } from 'react';
 import Image from 'next/image';
 
 interface ImagePreviewProps {
@@ -10,7 +9,7 @@ interface ImagePreviewProps {
   index: number;
 }
 
-export const ImagePreview = memo(function ImagePreview({
+function ImagePreview({
   imageUrl,
   imageName,
   onRemove,
@@ -56,4 +55,6 @@ export const ImagePreview = memo(function ImagePreview({
       )}
     </div>
   );
-});
+}
+
+export { ImagePreview };

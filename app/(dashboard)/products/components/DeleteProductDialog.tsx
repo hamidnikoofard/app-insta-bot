@@ -24,7 +24,7 @@ interface DeleteProductDialogProps {
   trigger?: React.ReactNode;
 }
 
-export function DeleteProductDialog({
+function DeleteProductDialog({
   productId,
   productName,
   onDelete,
@@ -85,3 +85,5 @@ export function DeleteProductDialog({
     </AlertDialog>
   );
 }
+
+export { DeleteProductDialog };

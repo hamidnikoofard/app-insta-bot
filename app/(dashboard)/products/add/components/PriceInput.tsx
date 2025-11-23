@@ -16,7 +16,7 @@ interface PriceInputProps {
     | FieldErrors<ProductFormData>['final_cost'];
 }
 
-export function PriceInput({
+function PriceInput({
   id,
   label,
   required = false,
@@ -59,3 +59,5 @@ export function PriceInput({
     </div>
   );
 }
+
+export { PriceInput };

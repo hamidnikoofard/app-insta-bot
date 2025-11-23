@@ -12,7 +12,7 @@ interface PricingSectionProps {
   errors: FieldErrors<ProductFormData>;
 }
 
-export function PricingSection({
+function PricingSection({
   primaryCostDisplay,
   finalCostDisplay,
   setPrimaryCostDisplay,
@@ -49,3 +49,5 @@ export function PricingSection({
     </div>
   );
 }
+
+export { PricingSection };

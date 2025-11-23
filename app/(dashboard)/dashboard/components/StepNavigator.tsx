@@ -1,7 +1,9 @@
 'use client';
-import { StepNavigatorDesktop } from './StepNavigatorDesktop';
-import { StepNavigatorMobile } from './StepNavigatorMobile';
-import { type StepNavigatorProps } from './StepNavigator.types';
+import {
+  StepNavigatorMobile,
+  StepNavigatorDesktop,
+} from '@/app/(dashboard)/dashboard/components';
+import { type StepNavigatorProps } from '@/app/(dashboard)/dashboard/components/StepNavigator.types';
 
 function StepNavigator({ currentStatus }: StepNavigatorProps) {
   return (

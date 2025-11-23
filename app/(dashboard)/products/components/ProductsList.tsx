@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { API_BASE_URL } from '@/lib/fetch';
 import { useQueryClient } from '@tanstack/react-query';
 
-export default function ProductsList() {
+function ProductsList() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -87,3 +87,5 @@ export default function ProductsList() {
     </>
   );
 }
+
+export { ProductsList };

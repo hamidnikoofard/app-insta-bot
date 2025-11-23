@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui';
 import { ArrowLeft, Package } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -6,7 +7,7 @@ interface PageHeaderProps {
   isEditMode: boolean;
 }
 
-export function PageHeader({ isEditMode }: PageHeaderProps) {
+function PageHeader({ isEditMode }: PageHeaderProps) {
   const router = useRouter();
 
   return (
@@ -39,3 +40,5 @@ export function PageHeader({ isEditMode }: PageHeaderProps) {
     </div>
   );
 }
+
+export { PageHeader };

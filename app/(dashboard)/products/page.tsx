@@ -1,53 +1,14 @@
-'use client';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { ProductsList, AccessDenied } from './components';
 import { Loading } from '@/components/ui';
-import { useAuth } from '@/contexts/AuthProvider';
+import { ProductsPageContent } from './components/ProductsPageContent';
 
-function ProductsPageContent() {
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
-  console.log(status);
-  if (status === 4) {
-    return (
-      <Suspense
-        fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
-      >
-        <ProductsList />
-      </Suspense>
-    );
-  }
-  if (status === 1) {
-    return (
-      <AccessDenied
-        title="شما اجازه دسترسی به این صفحه را ندارید"
-        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
-        status={status}
-      />
-    );
-  }
-  if (status === 2) {
-    return (
-      <AccessDenied
-        title="پیج اینستاگرام شما وصل نشده است"
-        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
-        status={status}
-      />
-    );
-  }
-  if (status === 3) {
-    return (
-      <AccessDenied
-        title="پیج اینستاگرام شما وصل نشده است"
-        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید و یا پیج شما تایید نشده است"
-        status={status}
-      />
-    );
-  }
-  return null;
-}
+export const metadata: Metadata = {
+  title: 'محصولات - Insta Bot',
+  description: 'مدیریت محصولات - Insta Bot',
+};
 
-function ProductsPage() {
+export default function ProductsPage() {
   return (
     <Suspense
       fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
@@ -56,4 +17,3 @@ function ProductsPage() {
     </Suspense>
   );
 }
-export default ProductsPage;

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui';
 import { Plus } from 'lucide-react';
 
-export function EmptyState() {
+function EmptyState() {
   return (
     <div className="bg-card border border-border rounded-xl p-8 text-center space-y-4">
       <div className="text-muted-foreground space-y-2">
@@ -22,3 +22,5 @@ export function EmptyState() {
     </div>
   );
 }
+
+export { EmptyState };

@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/components/ui';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -7,7 +8,7 @@ interface FormActionsProps {
   pending: boolean;
 }
 
-export function FormActions({ isEditMode, pending }: FormActionsProps) {
+function FormActions({ isEditMode, pending }: FormActionsProps) {
   const router = useRouter();
 
   return (
@@ -38,3 +39,5 @@ export function FormActions({ isEditMode, pending }: FormActionsProps) {
     </div>
   );
 }
+
+export { FormActions };

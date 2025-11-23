@@ -1,9 +1,8 @@
 'use client';
 import { Button } from '@/components/ui';
-import React from 'react';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import {
   AuthHeader,
@@ -35,8 +34,6 @@ function RegisterPage() {
     const result = await signupAction(data);
     if (result.success) {
       reset();
-      console.log(result);
-
       toast.success(result.message);
       router.push('/dashboard');
     } else {

@@ -1,5 +1,4 @@
 'use client';
-
 import { navItems } from './navItems';
 import { NavItemComponent } from './NavItem';
 

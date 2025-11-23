@@ -11,7 +11,7 @@ interface MobileCardsProps {
   onDelete: (id: number) => void;
 }
 
-export function MobileCards({
+function MobileCards({
   products,
   onUpdate,
   onDelete,
@@ -90,3 +90,5 @@ export function MobileCards({
     </div>
   );
 }
+
+export { MobileCards };

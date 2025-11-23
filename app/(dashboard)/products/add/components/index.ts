@@ -1,7 +1,8 @@
-export { PageHeader } from './PageHeader';
-export { BasicInformationSection } from './BasicInformationSection';
-export { PricingSection } from './PricingSection';
-export { ImagesSection } from './ImagesSection';
-export { FormActions } from './FormActions';
-export { ImagePreview } from './ImagePreview';
-export { PriceInput } from './PriceInput';
+export * from './PageHeader';
+export * from './BasicInformationSection';
+export * from './PricingSection';
+export * from './ImagesSection';
+export * from './FormActions';
+export * from './ImagePreview';
+export * from './PriceInput';
+export * from './AddProductPageContent';

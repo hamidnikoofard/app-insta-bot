@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui';
 
-export default function AccessDenied({
+function AccessDenied({
   title,
   description,
   status,
@@ -32,3 +32,5 @@ export default function AccessDenied({
     </div>
   );
 }
+
+export { AccessDenied };

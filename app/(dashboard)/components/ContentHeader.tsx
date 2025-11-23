@@ -7,8 +7,7 @@ import {
 } from '@/components/ui';
 import { BellIcon, MenuIcon, X, Moon, Sun } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useAuth } from '@/contexts/AuthProvider';
+import { useTheme, useAuth } from '@/contexts/index';
 
 interface ContentHeaderProps {
   isOpen: boolean;

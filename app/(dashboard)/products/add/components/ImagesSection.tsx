@@ -1,3 +1,4 @@
+'use client';
 import { Label } from '@/components/ui';
 import { Image as ImageIcon, Upload } from 'lucide-react';
 import { useRef } from 'react';

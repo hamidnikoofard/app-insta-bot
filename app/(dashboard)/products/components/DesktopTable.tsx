@@ -1,14 +1,14 @@
 'use client';
-import { Button } from '@/components/ui';
+import {
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui';
 import { Edit } from 'lucide-react';
 import Image from 'next/image';
 import { Product } from '../type';
 import { DeleteProductDialog } from './DeleteProductDialog';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 
 interface DesktopTableProps {
   products: Product[];
@@ -16,7 +16,7 @@ interface DesktopTableProps {
   onDelete: (id: number) => void;
 }
 
-export function DesktopTable({
+function DesktopTable({
   products,
   onUpdate,
   onDelete,
@@ -112,3 +112,5 @@ export function DesktopTable({
     </div>
   );
 }
+
+export { DesktopTable };

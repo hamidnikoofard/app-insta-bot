@@ -4,6 +4,11 @@ import { Edit } from 'lucide-react';
 import Image from 'next/image';
 import { Product } from '../type';
 import { DeleteProductDialog } from './DeleteProductDialog';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface DesktopTableProps {
   products: Product[];
@@ -80,14 +85,19 @@ export function DesktopTable({
               </td>
               <td className="p-4">
                 <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => onUpdate(product.id)}
-                    className="h-8 w-8"
-                  >
-                    <Edit className="h-4 w-4" />
-                  </Button>
+                  <Tooltip delayDuration={0}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onUpdate(product.id)}
+                        className="h-8 w-8"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">ویرایش محصول</TooltipContent>
+                  </Tooltip>
                   <DeleteProductDialog
                     productId={product.id}
                     productName={product.name}

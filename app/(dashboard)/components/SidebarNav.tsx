@@ -1,12 +1,15 @@
+'use client';
+
 import { navItems } from './navItems';
 import { NavItemComponent } from './NavItem';
 
 interface SidebarNavProps {
   pathname: string;
   isOpen: boolean;
+  onItemClick?: () => void;
 }
 
-export function SidebarNav({ pathname, isOpen }: SidebarNavProps) {
+export function SidebarNav({ pathname, isOpen, onItemClick }: SidebarNavProps) {
   const isItemActive = (itemHref: string) => {
     // اگر pathname دقیقاً برابر item.href باشد
     if (pathname === itemHref) return true;
@@ -24,6 +27,7 @@ export function SidebarNav({ pathname, isOpen }: SidebarNavProps) {
             item={item}
             isActive={isItemActive(item.href)}
             isOpen={isOpen}
+            onItemClick={onItemClick}
           />
         ))}
       </nav>

@@ -1,16 +1,21 @@
 'use client';
 import { useState } from 'react';
-import { Button } from '@/components/ui';
-import { Trash2 } from 'lucide-react';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui';
+import { Trash2 } from 'lucide-react';
 
 interface DeleteProductDialogProps {
   productId: number;
@@ -43,36 +48,40 @@ export function DeleteProductDialog({
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>{trigger || defaultTrigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-w-[90vw]">
-        <DialogHeader className="space-y-2">
-          <DialogTitle className="text-right text-lg sm:text-xl">
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      {trigger ? (
+        <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+      ) : (
+        <Tooltip delayDuration={0}>
+          <TooltipTrigger asChild>
+            <AlertDialogTrigger asChild>{defaultTrigger}</AlertDialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="top">حذف محصول</TooltipContent>
+        </Tooltip>
+      )}
+      <AlertDialogContent className="sm:max-w-[425px] max-w-[90vw]">
+        <AlertDialogHeader className="space-y-2">
+          <AlertDialogTitle className="text-lg sm:text-xl text-right">
             تایید حذف محصول
-          </DialogTitle>
-        </DialogHeader>
-        <DialogDescription className="text-right text-sm sm:text-base leading-relaxed">
-          آیا از حذف محصول{' '}
-          <span className="font-semibold text-foreground">{productName}</span>{' '}
-          اطمینان دارید؟ این عمل قابل بازگشت نیست.
-        </DialogDescription>
-        <DialogFooter className="flex-col-reverse sm:flex-row gap-3 sm:gap-2 pt-4 sm:pt-0">
-          <Button
-            variant="outline"
-            onClick={() => setOpen(false)}
-            className="w-full sm:w-auto"
-          >
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-sm sm:text-base leading-relaxed text-right">
+            آیا از حذف محصول{' '}
+            <span className="font-semibold text-foreground">{productName}</span>{' '}
+            اطمینان دارید؟ این عمل قابل بازگشت نیست.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="flex-col-reverse sm:flex-row gap-3 sm:gap-2 pt-4 sm:pt-0">
+          <AlertDialogCancel className="w-full sm:w-auto">
             انصراف
-          </Button>
-          <Button
-            variant="destructive"
+          </AlertDialogCancel>
+          <AlertDialogAction
             onClick={handleDelete}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
             حذف محصول
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

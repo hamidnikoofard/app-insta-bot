@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import QueryProvider from './QueryProvider';
 
+
 export const metadata: Metadata = {
   title: 'Insta Bot - ربات اینستاگرام',
   description: 'پلتفرم حرفه‌ای برای مدیریت و رشد حساب‌های اینستاگرام',

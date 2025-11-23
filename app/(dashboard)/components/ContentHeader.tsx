@@ -1,8 +1,14 @@
 'use client';
-import { Button } from '@/components/ui';
+import {
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui';
 import { BellIcon, MenuIcon, X, Moon, Sun } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthProvider';
 
 interface ContentHeaderProps {
   isOpen: boolean;
@@ -12,6 +18,7 @@ interface ContentHeaderProps {
 export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
   const pathName = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { first_name, last_name } = useAuth();
 
   const setTitle = () => {
     if (pathName.startsWith('/products')) {
@@ -36,47 +43,68 @@ export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
   return (
     <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md supports-backdrop-filter:bg-background/60 mb-6 ">
       <div className="bg-card rounded-xl p-4 mx-4 mt-4 shadow-sm border border-border/50 flex justify-between items-center">
-        <div className="md:flex items-center justify-between hidden">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onToggle}
-              className="h-9 w-9 hover:bg-accent/50 transition-colors"
-              aria-label={isOpen ? 'بستن منو' : 'باز کردن منو'}
-            >
-              {isOpen ? (
-                <X className="h-4 w-4" />
-              ) : (
-                <MenuIcon className="h-4 w-4" />
-              )}
-            </Button>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onToggle}
+                  aria-label={isOpen ? 'بستن منو' : 'باز کردن منو'}
+                  className="md:hidden block"
+                >
+                  {isOpen ? (
+                    <X className="h-5 w-5 md:h-4 md:w-4" />
+                  ) : (
+                    <MenuIcon className="h-5 w-5 md:h-4 md:w-4" />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                {isOpen ? 'بستن منو' : 'باز کردن منو'}
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
         <h2 className="md:text-lg font-medium">{setTitle()}</h2>
         <div className="flex items-center gap-3">
+          <span className="text-sm font-medium ">
+            {first_name} {last_name}
+          </span>
           <div className="flex items-center gap-3">
-            <span className="text-sm font-medium ">حمید نیکوفرد</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="h-9 w-9 hover:bg-accent/50 transition-colors"
-              suppressHydrationWarning
-            >
-              {theme === 'light' ? (
-                <Moon className="h-4 w-4" />
-              ) : theme === 'dark' ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </Button>
-            <Button variant="ghost" size="icon">
-              <BellIcon className="h-4 w-4" />
-            </Button>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleTheme}
+                  className="h-9 w-9 hover:bg-accent/50 transition-colors"
+                  suppressHydrationWarning
+                >
+                  {theme === 'light' ? (
+                    <Moon className="h-4 w-4" />
+                  ) : theme === 'dark' ? (
+                    <Sun className="h-4 w-4" />
+                  ) : (
+                    <Moon className="h-4 w-4" />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                {theme === 'light'
+                  ? 'فعال‌سازی حالت تاریک'
+                  : 'فعال‌سازی حالت روشن'}
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <BellIcon className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">اعلان‌ها</TooltipContent>
+            </Tooltip>
           </div>
         </div>
       </div>

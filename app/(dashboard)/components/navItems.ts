@@ -4,6 +4,7 @@ import {
   MessageCircle,
   MessageSquare,
   User,
+  ShoppingCart,
 } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
@@ -16,6 +17,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { label: 'داشبورد', href: '/dashboard', icon: LayoutDashboard },
   { label: ' محصولات', href: '/products', icon: Box },
+  { label: 'سفارشات', href: '/orders', icon: ShoppingCart },
   { label: ' تنظیمات پیام', href: '/settings-message', icon: MessageCircle },
   { label: 'پیام ها', href: '/messages', icon: MessageSquare },
   { label: 'پروفایل', href: '/profile', icon: User },

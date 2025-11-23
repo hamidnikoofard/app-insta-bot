@@ -15,11 +15,15 @@ import {
   FormActions,
 } from './components';
 import { Loading } from '@/components/ui';
+import { useAuth } from '@/contexts/AuthProvider';
+import { AccessDenied } from '../components';
 
 function AddProductPageContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const isEditMode = !!id;
+  const { online_shop } = useAuth();
+  const { status } = online_shop;
 
   // Form management
   const {
@@ -54,8 +58,18 @@ function AddProductPageContent() {
     );
   }
 
+  if (status !== 4) {
+    return (
+      <AccessDenied
+        title="پیج اینستاگرام شما وصل نشده است"
+        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
+        status={status}
+      />
+    );
+  }
+
   return (
-    <div className="w-full min-h-[calc(100vh-12rem)] pb-8">
+    <div className="w-full min-h-[calc(100vh-12rem)] pb-8 px-4">
       <PageHeader isEditMode={isEditMode} />
 
       <div className="bg-card border border-border rounded-xl sm:rounded-2xl shadow-sm overflow-hidden">

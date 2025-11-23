@@ -1,95 +1,50 @@
 'use client';
 import { Suspense } from 'react';
-import useGetData from '@/hooks/useGetData';
-import { ProductsResponse } from './type';
-import {
-  DesktopTable,
-  MobileCards,
-  EmptyState,
-  ProductsHeader,
-} from './components';
-import { ErrorDisplay, Loading } from '@/components/ui';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { toast } from 'sonner';
-import { API_BASE_URL } from '@/lib/fetch';
-import { useQueryClient } from '@tanstack/react-query';
+import { ProductsList, AccessDenied } from './components';
+import { Loading } from '@/components/ui';
+import { useAuth } from '@/contexts/AuthProvider';
 
 function ProductsPageContent() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const {
-    data: productsData,
-    isLoading,
-    error,
-  } = useGetData<ProductsResponse>({
-    url: 'bot/products',
-    queryKey: ['products'],
-  });
-
-  const handleDelete = async (id: number) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/bot/products/${id}/`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
-      if (!response.ok) {
-        throw new Error('Failed to delete product', {
-          cause: response.statusText,
-        });
-      }
-      toast.success('محصول با موفقیت حذف شد');
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-    } catch (error) {
-      toast.error('خطا در حذف محصول');
-    }
-  };
-
-  const handleUpdate = (id: number) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set('id', id.toString());
-    router.push(`/products/add?${newSearchParams.toString()}`);
-  };
-
-  if (error)
+  const { online_shop } = useAuth();
+  const { status } = online_shop;
+  console.log(status);
+  if (status === 4) {
     return (
-      <ErrorDisplay
-        error={error}
-        title="خطا در دریافت محصولات"
-        onRetry={() => window.location.reload()}
+      <Suspense
+        fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
+      >
+        <ProductsList />
+      </Suspense>
+    );
+  }
+  if (status === 1) {
+    return (
+      <AccessDenied
+        title="شما اجازه دسترسی به این صفحه را ندارید"
+        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
+        status={status}
       />
     );
-
-  return (
-    <div className="relative w-full min-h-[calc(100vh-12rem)]">
-      {isLoading && (
-        <Loading isLoading={true} message="در حال دریافت محصولات..." />
-      )}
-      {!isLoading && (
-        <div className="w-full space-y-6">
-          {productsData?.data.results?.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <>
-              <ProductsHeader />
-              <div className="bg-card border border-border rounded-xl overflow-hidden">
-                <DesktopTable
-                  products={productsData?.data.results || []}
-                  onUpdate={handleUpdate}
-                  onDelete={handleDelete}
-                />
-                <MobileCards
-                  products={productsData?.data.results || []}
-                  onUpdate={handleUpdate}
-                  onDelete={handleDelete}
-                />
-              </div>
-            </>
-          )}
-        </div>
-      )}
-    </div>
-  );
+  }
+  if (status === 2) {
+    return (
+      <AccessDenied
+        title="پیج اینستاگرام شما وصل نشده است"
+        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
+        status={status}
+      />
+    );
+  }
+  if (status === 3) {
+    return (
+      <AccessDenied
+        title="پیج اینستاگرام شما وصل نشده است"
+        description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید و یا پیج شما تایید نشده است"
+        status={status}
+      />
+    );
+  }
+  return null;
 }
 
 function ProductsPage() {
@@ -101,5 +56,4 @@ function ProductsPage() {
     </Suspense>
   );
 }
-
 export default ProductsPage;

@@ -16,11 +16,7 @@ interface DesktopTableProps {
   onDelete: (id: number) => void;
 }
 
-function DesktopTable({
-  products,
-  onUpdate,
-  onDelete,
-}: DesktopTableProps) {
+function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fa-IR').format(price);
   };

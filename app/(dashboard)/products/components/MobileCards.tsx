@@ -11,11 +11,7 @@ interface MobileCardsProps {
   onDelete: (id: number) => void;
 }
 
-function MobileCards({
-  products,
-  onUpdate,
-  onDelete,
-}: MobileCardsProps) {
+function MobileCards({ products, onUpdate, onDelete }: MobileCardsProps) {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fa-IR').format(price);
   };

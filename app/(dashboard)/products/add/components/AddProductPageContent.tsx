@@ -17,7 +17,7 @@ import { Loading } from '@/components/ui';
 import { useAuth } from '@/contexts';
 import { AccessDenied } from '../../components';
 
- function AddProductPageContent() {
+function AddProductPageContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const isEditMode = !!id;

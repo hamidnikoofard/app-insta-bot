@@ -2,9 +2,7 @@
 import { useState } from 'react';
 import {
   Button,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+  TooltipWrapper,
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -52,12 +50,13 @@ function DeleteProductDialog({
       {trigger ? (
         <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       ) : (
-        <Tooltip delayDuration={0}>
-          <TooltipTrigger asChild>
-            <AlertDialogTrigger asChild>{defaultTrigger}</AlertDialogTrigger>
-          </TooltipTrigger>
-          <TooltipContent side="top">حذف محصول</TooltipContent>
-        </Tooltip>
+        <TooltipWrapper
+          delayDuration={0}
+          content="حذف محصول"
+          contentProps={{ side: 'top' }}
+        >
+          <AlertDialogTrigger asChild>{defaultTrigger}</AlertDialogTrigger>
+        </TooltipWrapper>
       )}
       <AlertDialogContent className="sm:max-w-[425px] max-w-[90vw]">
         <AlertDialogHeader className="space-y-2">

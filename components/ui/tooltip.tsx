@@ -5,6 +5,9 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 import { cn } from '@/lib/utils';
 
+type TriggerProps = React.ComponentProps<typeof TooltipTrigger>;
+type ContentProps = React.ComponentProps<typeof TooltipContent>;
+
 function TooltipProvider({
   delayDuration = 0,
   ...props
@@ -58,4 +61,39 @@ function TooltipContent({
   );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+interface TooltipWrapperProps extends React.ComponentProps<typeof Tooltip> {
+  content: React.ReactNode;
+  contentProps?: Omit<ContentProps, 'children'>;
+  triggerProps?: Omit<TriggerProps, 'children'>;
+  children: React.ReactNode;
+}
+
+/**
+ * Tooltip wrapper component to reduce repetitive imports/usages across the app.
+ */
+function TooltipWrapper({
+  children,
+  content,
+  contentProps,
+  triggerProps,
+  ...tooltipProps
+}: TooltipWrapperProps) {
+  const triggerAsChild = triggerProps?.asChild ?? true;
+
+  return (
+    <Tooltip {...tooltipProps}>
+      <TooltipTrigger {...triggerProps} asChild={triggerAsChild}>
+        {children}
+      </TooltipTrigger>
+      <TooltipContent {...contentProps}>{content}</TooltipContent>
+    </Tooltip>
+  );
+}
+
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+  TooltipWrapper,
+};

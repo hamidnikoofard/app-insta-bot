@@ -1,107 +1,109 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { NavItem } from './navItems';
-import Link from 'next/link';
+import { useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { TooltipWrapper } from '@/components/ui/tooltip';
+import { NavItem as NavItemType } from './navItems';
+import { useMobile } from './hooks';
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+  NavItemLink,
+  NavItemDropdownButton,
+  NavItemDropdown,
+} from './NavItem/';
 
 interface NavItemProps {
-  item: NavItem;
+  item: NavItemType;
   isActive: boolean;
   isOpen: boolean;
   onItemClick?: () => void;
 }
 
+/**
+ * کامپوننت اصلی NavItem که از کامپوننت‌های کوچک‌تر تشکیل شده است
+ * بهینه شده با useMemo و کامپوننت‌های memoized برای بهبود performance
+ */
 export function NavItemComponent({
   item,
   isActive,
   isOpen,
   onItemClick,
 }: NavItemProps) {
-  const Icon = item.icon;
   const pathname = usePathname();
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMobile();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  // Memoize handlers برای جلوگیری از re-render غیرضروری
+  const handleClick = useMemo(
+    () => () => {
+      if (isMobile && onItemClick && pathname !== item.href) {
+        onItemClick();
+      }
+    },
+    [isMobile, onItemClick, pathname, item.href]
+  );
 
-  const handleClick = () => {
-    if (isMobile && onItemClick && pathname !== item.href) {
-      onItemClick();
-    }
-  };
+  const handleChildClick = useMemo(
+    () => () => {
+      if (isMobile && onItemClick) {
+        onItemClick();
+      }
+    },
+    [isMobile, onItemClick]
+  );
+
+  const handleDropdownClick = useMemo(
+    () => () => {
+      setIsDropdownOpen((prev) => !prev);
+    },
+    []
+  );
+
+  // بررسی اینکه آیا این آیتم children دارد یا نه
+  const hasChildren = item.children && isOpen && item.children.length > 0;
 
   const linkContent = (
-    <Link
-      href={item.href}
-      onClick={handleClick}
-      className={cn(
-        'flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 relative overflow-hidden',
-        'hover:bg-accent/50 active:bg-accent/70',
-        // بهبود برای موبایل: touch target بزرگتر
-        'md:hover:translate-x-[-2px]',
-        'touch-manipulation', // بهبود عملکرد touch
-        isActive
-          ? 'bg-primary/10 text-primary shadow-sm shadow-primary/20'
-          : 'text-muted-foreground hover:text-foreground',
-        !isOpen && 'justify-center px-2',
-        // حداقل ارتفاع برای موبایل
-        'min-h-[44px]'
+    <div className="relative">
+      {hasChildren ? (
+        <>
+          <NavItemDropdownButton
+            icon={item.icon}
+            label={item.label}
+            isActive={isActive}
+            isDropdownOpen={isDropdownOpen}
+            isOpen={isOpen}
+            isMobile={isMobile}
+            onToggle={handleDropdownClick}
+          />
+          <NavItemDropdown
+            children={item.children || []}
+            isOpen={isDropdownOpen}
+            onChildClick={handleChildClick}
+          />
+        </>
+      ) : (
+        <NavItemLink
+          href={item.href}
+          icon={item.icon}
+          label={item.label}
+          isActive={isActive}
+          isOpen={isOpen}
+          isMobile={isMobile}
+          onClick={handleClick}
+        />
       )}
-    >
-      {/* Active indicator */}
-      {isActive && (
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-l-full" />
-      )}
-
-      {/* Icon */}
-      <Icon
-        className={cn(
-          'shrink-0 transition-all duration-200',
-          isActive && 'scale-110',
-          'w-5 h-5 md:w-5 md:h-5',
-          // بزرگتر در موبایل
-          isMobile && 'w-6 h-6'
-        )}
-      />
-
-      {/* Label */}
-      <span
-        className={cn(
-          'text-sm font-medium transition-all duration-300 whitespace-nowrap',
-          isActive && 'font-semibold',
-          !isOpen && 'opacity-0 w-0 overflow-hidden',
-          isOpen && 'opacity-100',
-          // بزرگتر در موبایل
-          isMobile && 'text-base'
-        )}
-      >
-        {item.label}
-      </span>
-    </Link>
+    </div>
   );
 
   // اگر منو بسته است و در دسکتاپ هستیم، tooltip نمایش داده می‌شود
   if (!isOpen && !isMobile) {
     return (
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>{linkContent}</TooltipTrigger>
-        <TooltipContent side="right" sideOffset={8}>
-          {item.label}
-        </TooltipContent>
-      </Tooltip>
+      <TooltipWrapper
+        delayDuration={0}
+        content={item.label}
+        contentProps={{ side: 'right', sideOffset: 8 }}
+      >
+        {linkContent}
+      </TooltipWrapper>
     );
   }
 

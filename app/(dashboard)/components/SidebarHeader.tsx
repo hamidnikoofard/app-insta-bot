@@ -1,10 +1,5 @@
 'use client';
-import {
-  Button,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui';
+import { Button, TooltipWrapper } from '@/components/ui';
 import { MenuIcon, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -23,42 +18,44 @@ export function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
               منو
             </h2>
           </div>
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onToggle}
-                className={cn(
-                  'h-10 w-10 md:h-9 md:w-9',
-                  'hover:bg-accent/50 active:bg-accent/70',
-                  'transition-colors touch-manipulation',
-                  'min-h-[44px] min-w-[44px] md:min-h-0 md:min-w-0'
-                )}
-                aria-label="بستن منو"
-              >
-                <X className="h-5 w-5 md:h-4 md:w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">بستن منو</TooltipContent>
-          </Tooltip>
+          <TooltipWrapper
+            delayDuration={0}
+            content="بستن منو"
+            contentProps={{ side: 'left' }}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onToggle}
+              className={cn(
+                'h-10 w-10 md:h-9 md:w-9',
+                'hover:bg-accent/50 active:bg-accent/70',
+                'transition-colors touch-manipulation',
+                'min-h-[44px] min-w-[44px] md:min-h-0 md:min-w-0'
+              )}
+              aria-label="بستن منو"
+            >
+              <X className="h-5 w-5 md:h-4 md:w-4" />
+            </Button>
+          </TooltipWrapper>
         </div>
       ) : (
         <div className="items-center justify-center w-full hidden md:flex">
-          <Tooltip delayDuration={0}>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onToggle}
-                className="h-9 w-9 hover:bg-accent/50 transition-colors"
-                aria-label="باز کردن منو"
-              >
-                <MenuIcon className="h-4 w-4" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">باز کردن منو</TooltipContent>
-          </Tooltip>
+          <TooltipWrapper
+            delayDuration={0}
+            content="باز کردن منو"
+            contentProps={{ side: 'left' }}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onToggle}
+              className="h-9 w-9 hover:bg-accent/50 transition-colors"
+              aria-label="باز کردن منو"
+            >
+              <MenuIcon className="h-4 w-4" />
+            </Button>
+          </TooltipWrapper>
         </div>
       )}
     </div>

@@ -8,7 +8,7 @@ interface SidebarHeaderProps {
   onToggle: () => void;
 }
 
-export function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
+function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
   return (
     <div className="h-16 border-b border-border/40 flex items-center px-4 shrink-0 justify-between bg-card">
       {isOpen ? (
@@ -61,3 +61,5 @@ export function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
     </div>
   );
 }
+
+export { SidebarHeader };

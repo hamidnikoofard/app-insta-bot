@@ -6,7 +6,7 @@ interface SidebarFooterProps {
   isOpen: boolean;
 }
 
-export function SidebarFooter({ isOpen }: SidebarFooterProps) {
+function SidebarFooter({ isOpen }: SidebarFooterProps) {
   return (
     <div className="border-t border-border/40 p-3 shrink-0">
       {isOpen ? (
@@ -37,3 +37,5 @@ export function SidebarFooter({ isOpen }: SidebarFooterProps) {
     </div>
   );
 }
+
+export { SidebarFooter };

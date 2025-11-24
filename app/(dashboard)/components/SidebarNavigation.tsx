@@ -13,7 +13,7 @@ interface SidebarNavigationProps {
   onToggle: () => void;
 }
 
-export function SidebarNavigation({
+function SidebarNavigation({
   isOpen,
   pathname,
   onToggle,
@@ -70,3 +70,5 @@ export function SidebarNavigation({
     </>
   );
 }
+
+export { SidebarNavigation };

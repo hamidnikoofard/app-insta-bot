@@ -1,10 +1,5 @@
 'use client';
-import {
-  Button,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui';
+import { Button, TooltipWrapper } from '@/components/ui';
 import { Edit } from 'lucide-react';
 import Image from 'next/image';
 import { Product } from '../type';
@@ -81,19 +76,20 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
               </td>
               <td className="p-4">
                 <div className="flex items-center gap-2">
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => onUpdate(product.id)}
-                        className="h-8 w-8"
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="top">ویرایش محصول</TooltipContent>
-                  </Tooltip>
+                  <TooltipWrapper
+                    delayDuration={0}
+                    content="ویرایش محصول"
+                    contentProps={{ side: 'top' }}
+                  >
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => onUpdate(product.id)}
+                      className="h-8 w-8"
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                  </TooltipWrapper>
                   <DeleteProductDialog
                     productId={product.id}
                     productName={product.name}

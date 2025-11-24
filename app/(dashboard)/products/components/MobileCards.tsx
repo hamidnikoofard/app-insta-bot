@@ -52,7 +52,7 @@ function MobileCards({ products, onUpdate, onDelete }: MobileCardsProps) {
               </div>
             </div>
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-muted-foreground line-clamp-2">
             {product.description}
           </div>
           <div className="flex items-center gap-2 pt-2 border-t border-border">

@@ -6,6 +6,9 @@ const productSchema = z.object({
   primary_cost: z.string().min(1, { message: 'قیمت اولیه الزامی است' }),
   final_cost: z.string().optional(),
   //   images: z.array(z.string()).min(1, { message: 'تصاویر الزامی است' }),
+  setProductId: z.string().optional(),
+  stock: z.string().min(1, { message: 'موجودی الزامی است' }),
+  unique_name: z.string().optional(),
 });
 
 export default productSchema;

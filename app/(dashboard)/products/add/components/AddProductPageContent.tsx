@@ -31,6 +31,10 @@ function AddProductPageContent() {
     setPrimaryCostDisplay,
     finalCostDisplay,
     setFinalCostDisplay,
+    stockDisplay,
+    setStockDisplay,
+    setUniqueNameDisplay,
+    uniqueNameDisplay,
   } = useProductForm();
 
   const { register, handleSubmit, formState, setValue, reset } = form;
@@ -45,6 +49,8 @@ function AddProductPageContent() {
     reset,
     setPrimaryCostDisplay,
     setFinalCostDisplay,
+    setStockDisplay,
+    setUniqueNameDisplay,
     setExistingImages: imageManager.setExistingImages,
   });
 
@@ -77,13 +83,23 @@ function AddProductPageContent() {
           className="p-4 sm:p-6 lg:p-8"
         >
           <div className="space-y-6 sm:space-y-8">
-            <BasicInformationSection register={register} errors={errors} />
+            <BasicInformationSection
+              register={register}
+              errors={errors}
+              isEditMode={isEditMode}
+              productId={id?.toString() || undefined}
+              uniqueNameDisplay={uniqueNameDisplay}
+              setUniqueNameDisplay={setUniqueNameDisplay}
+              setValue={setValue}
+            />
 
             <PricingSection
               primaryCostDisplay={primaryCostDisplay}
               finalCostDisplay={finalCostDisplay}
+              stockDisplay={stockDisplay}
               setPrimaryCostDisplay={setPrimaryCostDisplay}
               setFinalCostDisplay={setFinalCostDisplay}
+              setStockDisplay={setStockDisplay}
               setValue={setValue}
               errors={errors}
             />

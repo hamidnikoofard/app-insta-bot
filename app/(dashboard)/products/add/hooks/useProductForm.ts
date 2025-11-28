@@ -9,7 +9,8 @@ export type ProductFormData = z.infer<typeof productSchema>;
 export function useProductForm() {
   const [primaryCostDisplay, setPrimaryCostDisplay] = useState('');
   const [finalCostDisplay, setFinalCostDisplay] = useState('');
-
+  const [stockDisplay, setStockDisplay] = useState('');
+  const [uniqueNameDisplay, setUniqueNameDisplay] = useState('');
   const form = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
   });
@@ -20,5 +21,9 @@ export function useProductForm() {
     setPrimaryCostDisplay,
     finalCostDisplay,
     setFinalCostDisplay,
+    stockDisplay,
+    setStockDisplay,
+    uniqueNameDisplay,
+    setUniqueNameDisplay,
   };
 }

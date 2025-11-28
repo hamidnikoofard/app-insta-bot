@@ -7,7 +7,6 @@ import { formatNumberWithCommas, removeCommas } from '../utils/formatNumber';
 interface PriceInputProps {
   id: 'primary_cost' | 'final_cost';
   label: string;
-  required?: boolean;
   value: string;
   onChange: (value: string) => void;
   setValue: UseFormSetValue<ProductFormData>;
@@ -19,7 +18,7 @@ interface PriceInputProps {
 function PriceInput({
   id,
   label,
-  required = false,
+
   value,
   onChange,
   setValue,
@@ -35,7 +34,7 @@ function PriceInput({
     <div className="space-y-2">
       <Label htmlFor={id} className="text-sm font-medium">
         {label}
-        {required && <span className="text-destructive"> *</span>}
+        <span className="text-destructive"> *</span>
       </Label>
       <Input
         id={id}

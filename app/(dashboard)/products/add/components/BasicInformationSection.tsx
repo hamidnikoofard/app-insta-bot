@@ -92,7 +92,6 @@ function BasicInformationSection({
             onChange={(e) => {
               const value = e.target.value;
               setUniqueNameDisplay(value);
-              setValue('setProductId', value);
               setValue('unique_name', value);
             }}
           />

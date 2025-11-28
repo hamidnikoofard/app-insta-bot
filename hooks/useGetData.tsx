@@ -11,7 +11,7 @@ function useGetData<T>({ url, queryKey }: UseGetDataOptions) {
   return useQuery<{ success: boolean; message: string; data: T }>({
     queryKey: queryKey ?? [url],
     queryFn: async () => {
-      const response = await fetch(`${API_BASE_URL}/${url}/`, {
+      const response = await fetch(`${API_BASE_URL}/${url}`, {
         method: 'GET',
         credentials: 'include',
         headers: {

@@ -13,6 +13,7 @@ export function useProductSubmit(productId: string | null) {
   const submitProduct = async (data: ProductFormData) => {
     if (pending) return;
     setPending(true);
+    console.log(data);
 
     try {
       const url = productId

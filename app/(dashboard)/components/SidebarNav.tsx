@@ -8,7 +8,7 @@ interface SidebarNavProps {
   onItemClick?: () => void;
 }
 
-export function SidebarNav({ pathname, isOpen, onItemClick }: SidebarNavProps) {
+function SidebarNav({ pathname, isOpen, onItemClick }: SidebarNavProps) {
   const isItemActive = (itemHref: string) => {
     // اگر pathname دقیقاً برابر item.href باشد
     if (pathname === itemHref) return true;
@@ -33,3 +33,5 @@ export function SidebarNav({ pathname, isOpen, onItemClick }: SidebarNavProps) {
     </div>
   );
 }
+
+export { SidebarNav };

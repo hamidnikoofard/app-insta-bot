@@ -40,6 +40,12 @@ function MobileCards({ products, onUpdate, onDelete }: MobileCardsProps) {
                   #{product.id}
                 </span>
               </div>
+              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                {product.unique_name && (
+                  <span>شناسه: {product.unique_name}</span>
+                )}
+                <span>موجودی: {formatPrice(product.stock)}</span>
+              </div>
               <div className="space-y-1">
                 <div className="text-sm text-muted-foreground line-through">
                   {formatPrice(product.primary_cost)} تومان
@@ -52,7 +58,7 @@ function MobileCards({ products, onUpdate, onDelete }: MobileCardsProps) {
               </div>
             </div>
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-muted-foreground line-clamp-2">
             {product.description}
           </div>
           <div className="flex items-center gap-2 pt-2 border-t border-border">

@@ -6,3 +6,4 @@ export * from './SuccessStep';
 export * from './StepNavigator';
 export * from './StepNavigatorDesktop';
 export * from './StepNavigatorMobile';
+export * from './ConnectedInstagramCard';

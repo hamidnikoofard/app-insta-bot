@@ -9,6 +9,8 @@ export type Product = {
   final_cost?: number | null;
   images?: ProductImage[] | null;
   description: string;
+  unique_name: string;
+  stock: number;
 };
 
 export type ProductsResponse = {

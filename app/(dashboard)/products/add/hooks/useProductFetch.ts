@@ -13,6 +13,8 @@ interface UseProductFetchProps {
   reset: UseFormReset<ProductFormData>;
   setPrimaryCostDisplay: (value: string) => void;
   setFinalCostDisplay: (value: string) => void;
+  setStockDisplay: (value: string) => void;
+  setUniqueNameDisplay: (value: string) => void;
   setExistingImages: (images: string[]) => void;
 }
 
@@ -21,6 +23,8 @@ export function useProductFetch({
   reset,
   setPrimaryCostDisplay,
   setFinalCostDisplay,
+  setStockDisplay,
+  setUniqueNameDisplay,
   setExistingImages,
 }: UseProductFetchProps) {
   const router = useRouter();
@@ -66,6 +70,9 @@ export function useProductFetch({
       description: productData.description,
       primary_cost: productData.primary_cost.toString(),
       final_cost: productData.final_cost?.toString() || '',
+      stock: productData.stock?.toString() || '',
+      unique_name: productData.unique_name || '',
+      setProductId: productData.unique_name || '',
     });
 
     // تنظیم نمایش قیمت‌ها با فرمت کاما
@@ -77,6 +84,14 @@ export function useProductFetch({
         formatNumberWithCommas(productData.final_cost.toString())
       );
     }
+    if (productData.stock) {
+      setStockDisplay(formatNumberWithCommas(productData.stock.toString()));
+    }
+
+    // تنظیم unique_name برای نمایش
+    if (productData.unique_name) {
+      setUniqueNameDisplay(productData.unique_name);
+    }
 
     // تنظیم تصاویر موجود
     if (productData.images && productData.images.length > 0) {
@@ -87,6 +102,8 @@ export function useProductFetch({
     reset,
     setPrimaryCostDisplay,
     setFinalCostDisplay,
+    setStockDisplay,
+    setUniqueNameDisplay,
     setExistingImages,
   ]);
 

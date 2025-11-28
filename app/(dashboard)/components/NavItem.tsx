@@ -18,11 +18,7 @@ interface NavItemProps {
   onItemClick?: () => void;
 }
 
-/**
- * کامپوننت اصلی NavItem که از کامپوننت‌های کوچک‌تر تشکیل شده است
- * بهینه شده با useMemo و کامپوننت‌های memoized برای بهبود performance
- */
-export function NavItemComponent({
+function NavItemComponent({
   item,
   isActive,
   isOpen,
@@ -32,7 +28,6 @@ export function NavItemComponent({
   const isMobile = useMobile();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Memoize handlers برای جلوگیری از re-render غیرضروری
   const handleClick = useMemo(
     () => () => {
       if (isMobile && onItemClick && pathname !== item.href) {
@@ -58,7 +53,6 @@ export function NavItemComponent({
     []
   );
 
-  // بررسی اینکه آیا این آیتم children دارد یا نه
   const hasChildren = item.children && isOpen && item.children.length > 0;
 
   const linkContent = (
@@ -94,7 +88,6 @@ export function NavItemComponent({
     </div>
   );
 
-  // اگر منو بسته است و در دسکتاپ هستیم، tooltip نمایش داده می‌شود
   if (!isOpen && !isMobile) {
     return (
       <TooltipWrapper
@@ -109,3 +102,5 @@ export function NavItemComponent({
 
   return <div className="relative">{linkContent}</div>;
 }
+
+export { NavItemComponent };

@@ -24,6 +24,8 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
             <th className="text-right p-4 font-medium text-sm">آیدی</th>
             <th className="text-right p-4 font-medium text-sm">عکس</th>
             <th className="text-right p-4 font-medium text-sm">نام محصول</th>
+            <th className="text-right p-4 font-medium text-sm">شناسه یکتا</th>
+            <th className="text-right p-4 font-medium text-sm">موجودی</th>
             <th className="text-right p-4 font-medium text-sm">قیمت</th>
             <th className="text-right p-4 font-medium text-sm">
               قیمت با تخفیف
@@ -56,6 +58,14 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
               </td>
               <td className="p-4">
                 <div className="font-medium">{product.name}</div>
+              </td>
+              <td className="p-4">
+                <div className=" text-sm text-muted-foreground">
+                  {product.unique_name ? product.unique_name : product.id}
+                </div>
+              </td>
+              <td className="p-4">
+                <div className="font-medium">{product.stock}</div>
               </td>
               <td className="p-4">
                 <div className="text-muted-foreground line-through">

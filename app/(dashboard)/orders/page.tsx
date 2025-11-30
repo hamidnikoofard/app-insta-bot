@@ -2,10 +2,13 @@
 import useGetData from '@/hooks/useGetData';
 import { OrdersResponse } from './type';
 import { Loading, ErrorDisplay } from '@/components/ui';
-import { EmptyState } from '../products/components';
+import { EmptyState, ProductsPagination } from '../products/components';
 import { OrdersHeader, DesktopTable, MobileTable } from './components';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function OrdersPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const {
     data: ordersData,
     isLoading,
@@ -17,6 +20,15 @@ function OrdersPage() {
   });
   const orders = ordersData?.data.results;
   const totalOrders = ordersData?.data.count;
+  const totalPages = Math.ceil((totalOrders || 0) / 10);
+  const currentPage = parseInt(searchParams.get('page') || '1');
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.set('page', page.toString());
+    router.push(`/orders?${newSearchParams.toString()}`);
+  };
 
   if (isError)
     return (
@@ -45,6 +57,13 @@ function OrdersPage() {
                 <DesktopTable orders={orders || []} />
                 <MobileTable orders={orders || []} />
               </div>
+              {totalPages > 1 && (
+                <ProductsPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              )}
             </>
           )}
         </div>

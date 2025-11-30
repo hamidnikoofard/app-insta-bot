@@ -15,7 +15,7 @@ function OrdersPage() {
     isError,
     error,
   } = useGetData<OrdersResponse>({
-    url: `bot/orders/`,
+    url: `bot/orders?${searchParams.toString()}`,
     queryKey: ['orders'],
   });
   const orders = ordersData?.data.results;

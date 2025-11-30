@@ -59,7 +59,7 @@ function PaginationLink({
           size,
         }),
         className
-      )} 
+      )}
       {...props}
     />
   );

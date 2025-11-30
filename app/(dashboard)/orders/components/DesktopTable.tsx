@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui';
 import { StatusChangeDialog } from './StatusChangeDialog';
 import { formatDate, formatPrice } from '../utils/formatters';
-import { CalendarDays, Hash, HandCoins, BadgeCheck, DollarSign } from 'lucide-react';
+import {
+  CalendarDays,
+  Hash,
+  HandCoins,
+  BadgeCheck,
+  DollarSign,
+} from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 interface DesktopTableProps {

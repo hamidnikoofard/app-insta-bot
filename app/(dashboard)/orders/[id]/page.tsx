@@ -8,7 +8,7 @@ function page() {
     queryKey: ['order', 10],
   });
   console.log(data);
-  
+
   return <div>page</div>;
 }
 

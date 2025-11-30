@@ -16,7 +16,10 @@ export const statusColors = {
   default: 'text-muted-foreground bg-muted',
 };
 
-export function getStatusInfo(status: number): { text: string; className: string } {
+export function getStatusInfo(status: number): {
+  text: string;
+  className: string;
+} {
   switch (status) {
     case 3:
       return {
@@ -58,4 +61,3 @@ export const statusOptions = [
   { value: '6', label: statusTexts[6] },
   { value: '7', label: statusTexts[7] },
 ];
-

@@ -27,7 +27,7 @@ export function ContentHeader({ isOpen, onToggle }: ContentHeaderProps) {
     if (pathName.startsWith('/profile')) {
       return 'پروفایل';
     }
-    if (pathName.startsWith('/orders')){
+    if (pathName.startsWith('/orders')) {
       return 'سفارشات';
     }
     switch (pathName) {

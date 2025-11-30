@@ -81,7 +81,13 @@ function ProductsList() {
         {!isLoading && (
           <div className="w-full space-y-6">
             {productsData?.data.results?.length === 0 ? (
-              <EmptyState />
+              <EmptyState
+                title="هنوز محصولی اضافه نشده است"
+                description='برای شروع، روی دکمه "اضافه کردن محصول" کلیک کنید و اولین
+          محصول خود را به سیستم اضافه کنید.'
+                buttonText="اضافه کردن محصول"
+                buttonLink="/products/add"
+              />
             ) : (
               <>
                 <ProductsHeader />

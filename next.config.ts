@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: '598.ir',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.598.ir',
+      },
     ],
   },
 };

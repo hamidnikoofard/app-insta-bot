@@ -2,7 +2,8 @@ import { Orders } from '../type';
 import Link from 'next/link';
 import { Button } from '@/components/ui';
 import { StatusChangeDialog } from './StatusChangeDialog';
-import { formatDate, formatPrice } from '../utils/formatters';
+import { formatPrice } from '../utils/formatters';
+import { formatDate } from '@/lib/utils';
 
 interface MobileTableProps {
   orders: Orders[];

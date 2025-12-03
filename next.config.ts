@@ -20,11 +20,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '598.ir',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.598.ir',
+        hostname: 'lookaside.fbsbx.com',
       },
     ],
   },

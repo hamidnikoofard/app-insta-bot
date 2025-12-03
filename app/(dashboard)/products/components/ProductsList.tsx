@@ -24,7 +24,7 @@ function ProductsList() {
     isLoading,
     error,
   } = useGetData<ProductsResponse>({
-    url: `bot/products?${searchParams.toString()}/`,
+    url: `bot/products/?${searchParams.toString()}`,
     queryKey: ['products', searchParams.toString()],
   });
 

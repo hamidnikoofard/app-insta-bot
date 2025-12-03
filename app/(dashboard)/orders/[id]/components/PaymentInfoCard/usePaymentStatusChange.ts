@@ -1,31 +1,27 @@
 import { useState } from 'react';
 import { useQueryClient } from '@/app/QueryProvider';
-import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/lib/fetch';
 
 interface UsePaymentStatusChangeProps {
-  paymentId: number;
+  orderId: number;
 }
 
 export function usePaymentStatusChange({
-  paymentId,
+  orderId,
 }: UsePaymentStatusChangeProps) {
   const [pending, setPending] = useState(false);
   const queryClient = useQueryClient();
-  const params = useParams();
-  const orderId = params.id as string;
 
   const changeStatus = async (newStatus: string) => {
     if (pending) return;
     setPending(true);
-
     try {
       const response = await fetch(
-        `${API_BASE_URL}/bot/payments/${paymentId}/`,
+        `${API_BASE_URL}/bot/payment-approval/${orderId}/`,
         {
-          method: 'PATCH',
-          body: JSON.stringify({ status: newStatus }),
+          method: 'POST',
+          body: JSON.stringify({ is_approved: newStatus }),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -38,9 +34,8 @@ export function usePaymentStatusChange({
         throw new Error(errorData.message || 'خطا در تغییر وضعیت پرداخت');
       }
 
-      // Invalidate order query to refresh data
       queryClient.invalidateQueries({ queryKey: ['order', orderId] });
-
+      queryClient.invalidateQueries({ queryKey: ['orders'] });
       toast.success(
         newStatus === 'true'
           ? 'پرداخت با موفقیت تایید شد'
@@ -52,6 +47,7 @@ export function usePaymentStatusChange({
       toast.error(
         error instanceof Error ? error.message : 'خطا در تغییر وضعیت پرداخت'
       );
+      console.log(error);
       return false;
     } finally {
       setPending(false);

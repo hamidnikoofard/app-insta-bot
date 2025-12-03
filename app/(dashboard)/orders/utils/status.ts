@@ -7,6 +7,7 @@ export const statusTexts = {
   8: 'بازگشت داده شده توسط مشتری',
   9: 'بازگشت داده شده توسط سیستم',
   10: 'لغو شده',
+  11: 'پرداخت رد شد',
   default: 'نامشخص',
 };
 
@@ -19,6 +20,7 @@ export const statusColors = {
   8: 'text-red-600 dark:text-red-500 bg-red-100 dark:bg-red-900/30',
   9: 'text-red-600 dark:text-red-500 bg-red-100 dark:bg-red-900/30',
   10: 'text-red-600 dark:text-red-500 bg-red-100 dark:bg-red-900/30',
+  11: 'text-red-600 dark:text-red-500 bg-red-100 dark:bg-red-900/30',
   default: 'text-muted-foreground bg-muted',
 };
 
@@ -67,6 +69,11 @@ export function getStatusInfo(status: number): {
         text: statusTexts[10],
         className: statusColors[10],
       };
+    case 11:
+      return {
+        text: statusTexts[11],
+        className: statusColors[11],
+      };
     default:
       return {
         text: statusTexts.default,
@@ -84,4 +91,5 @@ export const statusOptions = [
   { value: 8, label: statusTexts[8] },
   { value: 9, label: statusTexts[9] },
   { value: 10, label: statusTexts[10] },
+  { value: 11, label: statusTexts[11] },
 ];

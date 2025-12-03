@@ -11,6 +11,7 @@ import {
   usePaymentStatusChange,
 } from './index';
 import { CheckCircle, XCircle } from 'lucide-react';
+import { useParams } from 'next/navigation';
 
 interface PaymentInfoCardProps {
   payment: Order['payment'] | null;
@@ -19,9 +20,11 @@ interface PaymentInfoCardProps {
 function PaymentInfoCard({ payment }: PaymentInfoCardProps) {
   const [approveDialogOpen, setApproveDialogOpen] = useState(false);
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
+  const params = useParams();
+  const orderId = params.id as string;
 
   const { changeStatus, pending } = usePaymentStatusChange({
-    paymentId: payment?.id || 0,
+    orderId: Number(orderId),
   });
 
   const canChangeStatus = payment?.status;

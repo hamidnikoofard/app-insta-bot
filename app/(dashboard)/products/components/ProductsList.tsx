@@ -24,8 +24,8 @@ function ProductsList() {
     isLoading,
     error,
   } = useGetData<ProductsResponse>({
-    url: `bot/products/`,
-    queryKey: ['products'],
+    url: `bot/products?${searchParams.toString()}/`,
+    queryKey: ['products', searchParams.toString()],
   });
 
   const count = productsData?.data.count || 0;

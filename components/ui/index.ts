@@ -10,3 +10,6 @@ export * from './loading';
 export * from './textarea';
 export * from './tooltip';
 export * from './alert-dialog';
+export * from './pagination';
+export * from './badge';
+export * from './radio-group';

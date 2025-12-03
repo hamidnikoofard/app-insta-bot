@@ -15,7 +15,7 @@ function SuccessStep() {
     isLoading,
     error,
   } = useGetData<OnlineShop>({
-    url: 'users/online-shop',
+    url: 'users/online-shop/',
     queryKey: ['online-shop'],
   });
   if (isLoading) {

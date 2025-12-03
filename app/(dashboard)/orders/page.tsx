@@ -1,10 +1,19 @@
-function OrdersPage() {
+import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { Loading } from '@/components/ui';
+import { OrderList } from './components';
+
+export const metadata: Metadata = {
+  title: 'سفارشات - Insta Bot',
+  description: 'مدیریت سفارشات - Insta Bot',
+};
+
+export default function OrdersPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">سفارشات</h1>
-      <p className="text-muted-foreground">صفحه سفارشات</p>
-    </div>
+    <Suspense
+      fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
+    >
+      <OrderList />
+    </Suspense>
   );
 }
-
-export default OrdersPage;

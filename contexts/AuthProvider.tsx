@@ -21,7 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { data, isLoading, error, isSuccess } = useGetData<AuthContextType>({
-    url: 'users/info',
+    url: 'users/info/',
     queryKey: ['user'],
   });
 

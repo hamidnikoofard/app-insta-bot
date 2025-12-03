@@ -1,6 +1,7 @@
 import { ImageIcon, ShoppingBag } from 'lucide-react';
 import { Order } from '../../type';
 import { InfoCardHeader } from '../index';
+import { EmptyState } from '@/app/(dashboard)/products/components';
 import Image from 'next/image';
 import { formatPrice } from '../../../utils/formatters';
 import { Button } from '@/components/ui';
@@ -11,6 +12,14 @@ interface ItemsInfoCardProps {
 }
 
 function ItemsInfoCard({ items }: ItemsInfoCardProps) {
+  if (!items) {
+    return (
+      <EmptyState
+        title="محصولات یافت نشد"
+        description="محصولاتی با این شناسه یافت نشد"
+      />
+    );
+  }
   return (
     <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm hover:shadow-lg transition-all duration-300 w-full lg:flex-1">
       <InfoCardHeader icon={ShoppingBag} title="محصولات سفارش داده شده" />

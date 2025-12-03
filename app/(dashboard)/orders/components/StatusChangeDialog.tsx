@@ -19,48 +19,47 @@ import { getStatusInfo, statusOptions } from '../utils/status';
 import { Orders } from '../type';
 import { cn } from '@/lib/utils';
 import { Edit } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/fetch';
+import { toast } from 'sonner';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface StatusChangeDialogProps {
   order: Orders;
 }
 
 function StatusChangeDialog({ order }: StatusChangeDialogProps) {
-  const [selectedStatus, setSelectedStatus] = useState<string>(
-    order.status.toString()
-  );
   const [open, setOpen] = useState(false);
-
-  const handleStatusChange = async (newStatus: string) => {
-    // TODO: اینجا API call برای تغییر وضعیت اضافه می‌شود
-    // مثال:
-    // try {
-    //   await updateOrderStatus(order.id, parseInt(newStatus));
-    //   setOpen(false);
-    //   // ممکن است نیاز به refresh داده‌ها باشد
-    // } catch (error) {
-    //   console.error('خطا در تغییر وضعیت:', error);
-    // }
-
-    setSelectedStatus(newStatus);
-  };
-
-  const handleSave = () => {
-    handleStatusChange(selectedStatus);
-    setOpen(false);
+  const [selectedStatus, setSelectedStatus] = useState(order.status);
+  const queryClient = useQueryClient();
+  const handleStatusChange = async (newStatus: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/bot/orders/${order.id}/`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: newStatus }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to change order status');
+      }
+      toast.success('وضعیت سفارش با موفقیت تغییر کرد');
+      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      setSelectedStatus(newStatus);
+      setOpen(false);
+    } catch (error) {
+      toast.error('خطا در تغییر وضعیت' + (error as Error).message);
+    }
   };
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    if (!isOpen) {
-      // Reset به وضعیت اصلی وقتی Dialog بسته می‌شود بدون ذخیره
-      setSelectedStatus(order.status.toString());
-    }
+    if (!isOpen) setSelectedStatus(order.status);
   };
 
-  const statusInfo = getStatusInfo(order.status);
-
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="flex items-center gap-1.5 cursor-pointer">
           <Edit className="text-muted-foreground " size={16} />
@@ -68,11 +67,11 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
             type="button"
             className={cn(
               badgeVariants(),
-              statusInfo.className,
+              getStatusInfo(selectedStatus).className,
               'cursor-pointer '
             )}
           >
-            {statusInfo.text}
+            {getStatusInfo(selectedStatus).text}
           </button>
         </div>
       </DialogTrigger>
@@ -82,13 +81,13 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
             تغییر وضعیت سفارش #{order.id}
           </DialogTitle>
           <DialogDescription className="text-right">
-            وضعیت فعلی: {getStatusInfo(order.status).text}
+            وضعیت فعلی: {getStatusInfo(selectedStatus).text}
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <RadioGroup
-            value={selectedStatus}
-            onValueChange={setSelectedStatus}
+            value={selectedStatus.toString()}
+            onValueChange={(value) => setSelectedStatus(Number(value))}
             className="space-y-3"
           >
             {statusOptions.map((option) => (
@@ -97,7 +96,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
                 className="flex items-center gap-2 flex-row-reverse"
               >
                 <RadioGroupItem
-                  value={option.value}
+                  value={option.value.toString()}
                   id={`status-${order.id}-${option.value}`}
                   className="cursor-pointer"
                 />
@@ -115,15 +114,15 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
           <Button
             type="button"
             variant="default"
-            onClick={handleSave}
-            disabled={selectedStatus === order.status.toString()}
+            onClick={() => handleStatusChange(selectedStatus)}
+            disabled={selectedStatus === order.status}
           >
             ذخیره تغییرات
           </Button>
           <Button
             type="button"
             variant="outline"
-            onClick={() => setOpen(false)}
+            onClick={() => handleOpenChange(false)}
           >
             انصراف
           </Button>

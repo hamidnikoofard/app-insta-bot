@@ -3,12 +3,21 @@
 import { MapPin, Building2, Phone, Mail } from 'lucide-react';
 import { customer_address } from '../type';
 import { AddressInfoCardHeader, AddressInfoItem } from './AddressInfoCard/';
+import { EmptyState } from '@/app/(dashboard)/products/components';
 
 interface AddressInfoCardProps {
   address: customer_address;
 }
 
 function AddressInfoCard({ address }: AddressInfoCardProps) {
+  if (!address) {
+    return (
+      <EmptyState
+        title="آدرس یافت نشد"
+        description="آدرسی با این شناسه یافت نشد"
+      />
+    );
+  }
   return (
     <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm hover:shadow-md transition-all duration-300 w-full lg:flex-1">
       <AddressInfoCardHeader />

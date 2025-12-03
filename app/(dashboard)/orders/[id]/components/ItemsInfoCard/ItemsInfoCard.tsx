@@ -12,11 +12,11 @@ interface ItemsInfoCardProps {
 }
 
 function ItemsInfoCard({ items }: ItemsInfoCardProps) {
-  if (!items) {
+  if (items?.length === 0) {
     return (
       <EmptyState
         title="محصولات یافت نشد"
-        description="محصولاتی با این شناسه یافت نشد"
+        description="هنوز محصولی سفارش داده نشده است"
       />
     );
   }

@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'lookaside.fbsbx.com',
+        hostname: 'inasta.ir',
       },
     ],
   },

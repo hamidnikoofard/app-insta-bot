@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'inasta.ir',
+        hostname: 'www.598.ir',
       },
     ],
   },

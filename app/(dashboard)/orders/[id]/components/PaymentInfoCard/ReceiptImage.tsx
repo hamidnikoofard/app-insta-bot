@@ -8,7 +8,6 @@ import {
   DialogTrigger,
   DialogDescription,
 } from '@/components/ui';
-import { Order } from '../../type';
 
 interface ReceiptImageProps {
   receiptImageUrl: string;
@@ -35,6 +34,7 @@ function ReceiptImage({ receiptImageUrl }: ReceiptImageProps) {
                 width={200}
                 height={200}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
                 <EyeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />

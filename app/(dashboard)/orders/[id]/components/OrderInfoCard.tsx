@@ -1,9 +1,9 @@
 'use client';
 
-import { Hash, Calendar } from 'lucide-react';
+import { Hash, Calendar, Package } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { Order } from '../type';
-import { OrderInfoCardHeader, TotalAmountItem, OrderInfoItem } from './index';
+import { InfoCardHeader, OrderInfoItem, TotalAmountItem } from './index';
 
 interface OrderInfoCardProps {
   order: Order;
@@ -12,7 +12,7 @@ interface OrderInfoCardProps {
 function OrderInfoCard({ order }: OrderInfoCardProps) {
   return (
     <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm hover:shadow-md transition-all duration-300 w-full lg:flex-1">
-      <OrderInfoCardHeader />
+      <InfoCardHeader icon={Package} title="اطلاعات سفارش" />
 
       <div className="p-6 space-y-5">
         <div className="flex items-start justify-between gap-4">

@@ -4,14 +4,7 @@ import { Button } from '@/components/ui';
 import { StatusChangeDialog } from './StatusChangeDialog';
 import { formatPrice } from '../utils/formatters';
 import { formatDate } from '@/lib/utils';
-import {
-  CalendarDays,
-  Hash,
-  HandCoins,
-  BadgeCheck,
-  DollarSign,
-} from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { CalendarDays, Hash, BadgeCheck, DollarSign } from 'lucide-react';
 
 interface DesktopTableProps {
   orders: Orders[];

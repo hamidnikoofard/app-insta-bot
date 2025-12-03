@@ -4,9 +4,14 @@ import { Order } from './type';
 import { useParams } from 'next/navigation';
 import { Loading } from '@/components/ui';
 import { EmptyState } from '../../products/components';
-import { OrderInfoCard, PaymentInfoCard } from './components';
+import {
+  OrderInfoCard,
+  PaymentInfoCard,
+  AddressInfoCard,
+  ItemsInfoCard,
+} from './components';
 
-function page() {
+function OrderDetailsPage() {
   const params = useParams();
   const { id } = params;
 
@@ -14,8 +19,6 @@ function page() {
     url: `bot/orders/${id}/`,
     queryKey: ['order', id as string],
   });
-
-  console.log(orderData?.data);
 
   if (!orderData?.data)
     return (
@@ -33,8 +36,14 @@ function page() {
         <div className="w-full space-y-6">
           <h1 className="text-2xl font-bold">سفارش {orderData?.data.id}</h1>
           <div className="flex flex-col lg:flex-row items-start gap-4">
-            <OrderInfoCard order={orderData.data} />
-            <PaymentInfoCard payment={orderData.data.payment} />
+            <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
+              <OrderInfoCard order={orderData.data} />
+              <AddressInfoCard address={orderData.data.customer_address} />
+            </div>
+            <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
+              <PaymentInfoCard payment={orderData.data.payment} />
+              <ItemsInfoCard items={orderData.data.items} />
+            </div>
           </div>
         </div>
       )}
@@ -42,4 +51,4 @@ function page() {
   );
 }
 
-export default page;
+export default OrderDetailsPage;

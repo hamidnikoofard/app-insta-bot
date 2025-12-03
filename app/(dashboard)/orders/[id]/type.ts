@@ -1,11 +1,3 @@
-export type Item = {
-  id: number;
-  product: Product;
-  quantity: number;
-  final_price: number;
-  primary_price: number;
-};
-
 export type Product = {
   id: number;
   name: string;
@@ -28,6 +20,14 @@ export type customer_address = {
   postal_code: string;
   province: string;
 };
+
+export type Items = {
+  product_final_amount: number;
+  product_main_image_url: string;
+  product_name: string;
+  product_primary_amount: number;
+};
+
 export type Order = {
   created_at: string;
   id: number;
@@ -36,7 +36,7 @@ export type Order = {
   total_amount: number;
   shipping_amount: number;
   status: number;
-  items: Item[];
+  items: Items[];
   payment: payment;
   customer_address: customer_address;
 };

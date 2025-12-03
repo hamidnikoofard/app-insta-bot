@@ -18,7 +18,7 @@ import {
 import { getStatusInfo, statusOptions } from '../utils/status';
 import { Orders } from '../type';
 import { cn } from '@/lib/utils';
-import { Edit, Pencil } from 'lucide-react';
+import { Edit } from 'lucide-react';
 
 interface StatusChangeDialogProps {
   order: Orders;

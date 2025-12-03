@@ -52,7 +52,7 @@ function ProductsList() {
       }
       toast.success('محصول با موفقیت حذف شد');
       queryClient.invalidateQueries({ queryKey: ['products'] });
-    } catch (error) {
+    } catch (error: unknown) {
       toast.error('خطا در حذف محصول');
     }
   };

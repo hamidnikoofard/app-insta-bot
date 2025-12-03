@@ -65,10 +65,11 @@ function ItemsInfoCard({ items }: ItemsInfoCardProps) {
                   </p>
                 </div>
               </div>
-              <Button asChild className="w-full sm:w-auto shrink-0">
-                <Button onClick={() => handleViewProduct(item.product_id)}>
-                  مشاهده محصول
-                </Button>
+              <Button
+                onClick={() => handleViewProduct(item.product_id)}
+                className="w-full sm:w-auto shrink-0"
+              >
+                مشاهده محصول
               </Button>
             </div>
           ))}

@@ -26,6 +26,7 @@ export type Items = {
   product_main_image_url: string;
   product_name: string;
   product_primary_amount: number;
+  product_id: number;
 };
 
 export type Order = {

@@ -25,7 +25,7 @@ export function OrderInfoItem({
 
   return (
     <div
-      className={`flex items-center justify-between gap-4 p-4 rounded-lg ${containerClassName} transition-colors border border-transparent `}
+      className={`flex items-center justify-between gap-4 p-4 rounded-lg ${containerClassName} transition-colors border border-transparent`}
     >
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <div

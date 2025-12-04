@@ -20,7 +20,7 @@ function OrderInfoCard({ order }: OrderInfoCardProps) {
       />
 
       <div className="p-6 space-y-5">
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-4">
           {/* <OrderInfoItem
             icon={Hash}
             label="شناسه سفارش"

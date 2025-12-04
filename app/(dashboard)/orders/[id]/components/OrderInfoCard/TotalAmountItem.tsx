@@ -7,7 +7,7 @@ interface TotalAmountItemProps {
 
 export function TotalAmountItem({ totalAmount }: TotalAmountItemProps) {
   return (
-    <div className="flex items-center justify-start gap-4 p-4 rounded-lg bg-accent/5 border-2 border-accent/20">
+    <div className="flex items-center justify-start gap-4 p-4 rounded-lg bg-accent/5 border-2 border-accent/20 flex-1">
       <div className="flex items-center gap-3 min-w-0">
         <div className="flex items-center justify-center w-9 h-9 rounded-md bg-accent/20 text-accent shrink-0">
           <DollarSign className="w-4 h-4" />

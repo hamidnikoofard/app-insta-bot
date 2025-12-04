@@ -28,6 +28,8 @@ function ProductsList() {
     queryKey: ['products', searchParams.toString()],
   });
 
+  console.log(productsData);
+
   const count = productsData?.data.count || 0;
   const totalPages = Math.ceil(count / 10);
   const currentPage = parseInt(searchParams.get('page') || '1');

@@ -106,7 +106,7 @@ function BasicInformationSection({
         <Textarea
           id="description"
           placeholder="توضیحات کامل محصول را وارد کنید..."
-          rows={8}
+          rows={10}
           {...register('description')}
           className={cn(
             'resize-none',

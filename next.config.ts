@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'lookaside.fbsbx.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'direshop.shop',
+      }
     ],
   },
 };

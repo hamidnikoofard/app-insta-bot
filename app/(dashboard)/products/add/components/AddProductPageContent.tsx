@@ -74,7 +74,7 @@ function AddProductPageContent() {
   }
 
   return (
-    <div className="w-full min-h-[calc(100vh-12rem)] pb-8 px-4">
+    <div className="w-full min-h-[calc(100vh-12rem)] pb-8 px-48 pt-8">
       <PageHeader isEditMode={isEditMode} />
 
       <div className="bg-card border border-border rounded-xl sm:rounded-2xl shadow-sm overflow-hidden">

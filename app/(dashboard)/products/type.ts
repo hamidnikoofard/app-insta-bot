@@ -11,6 +11,7 @@ export type Product = {
   description: string;
   unique_name: string;
   stock: number;
+  main_image_url:string | null;
 };
 
 export type ProductsResponse = {

@@ -18,7 +18,7 @@ RUN npm run build
 FROM node:20-alpine AS runner
 
 WORKDIR /app
-ENV PORT 3000
+ENV PORT=3000
 EXPOSE 3000
 COPY --from=builder /app/package.json ./
 

@@ -35,7 +35,6 @@ function ReceiptImage({ receiptImageUrl }: ReceiptImageProps) {
                 width={200}
                 height={200}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                unoptimized={true}
               />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
                 <EyeIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -56,7 +55,6 @@ function ReceiptImage({ receiptImageUrl }: ReceiptImageProps) {
                 width={500}
                 height={500}
                 className="w-full h-full object-contain max-h-[70vh]"
-                unoptimized={true}
               />
             </DialogDescription>
           </DialogContent>

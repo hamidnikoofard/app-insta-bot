@@ -53,7 +53,6 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized={true}
                     />
                   ) : (
                     <div className="w-full h-full bg-muted flex items-center justify-center">

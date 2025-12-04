@@ -4,7 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   // مجاز کردن درخواست‌های cross-origin در محیط توسعه
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
+
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'http',

@@ -40,7 +40,6 @@ function ItemsMobileCards({ items }: ItemsMobileCardsProps) {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  unoptimized={true}
                 />
               ) : (
                 <div className="w-full h-full rounded-lg bg-muted flex items-center justify-center">

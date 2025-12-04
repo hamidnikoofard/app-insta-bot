@@ -28,7 +28,6 @@ function ImagePreview({
         className="object-cover"
         sizes="(max-width: 768px) 50vw, 200px"
         loading="lazy"
-        unoptimized={true}
       />
       {isExisting ? (
         <div className="absolute top-1 right-1 px-1.5 py-0.5 bg-primary/90 text-primary-foreground text-[10px] rounded"></div>

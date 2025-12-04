@@ -28,8 +28,6 @@ function ProductsList() {
     queryKey: ['products', searchParams.toString()],
   });
 
-  console.log(productsData);
-
   const count = productsData?.data.count || 0;
   const totalPages = Math.ceil(count / 10);
   const currentPage = parseInt(searchParams.get('page') || '1');
@@ -76,7 +74,7 @@ function ProductsList() {
 
   return (
     <>
-      <div className="relative w-full min-h-[calc(100vh-12rem)] px-4 pb-8">
+      <div className="relative w-full min-h-[calc(100vh-12rem)] pb-8">
         {isLoading && (
           <Loading isLoading={true} message="در حال دریافت محصولات..." />
         )}

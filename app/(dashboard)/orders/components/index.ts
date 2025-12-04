@@ -3,3 +3,4 @@ export * from './DesktopTable';
 export * from './MobileTable';
 export * from './StatusChangeDialog';
 export * from './OrderList';
+export * from './OrdersPageContent';

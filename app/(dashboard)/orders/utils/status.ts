@@ -1,4 +1,6 @@
 export const statusTexts = {
+  1: "در انتظار پرداخت ",
+  2 : 'در اتنظار دریافت آدرس',
   3: 'در انتظار تایید پرداخت',
   4: 'تایید پرداخت',
   5: 'در حال بسته بندی',
@@ -12,6 +14,8 @@ export const statusTexts = {
 };
 
 export const statusColors = {
+  1: 'text-muted-foreground bg-muted',
+  2: 'text-muted-foreground bg-muted',
   3: 'text-blue-600 dark:text-blue-500 bg-blue-100 dark:bg-blue-900/30',
   4: 'text-green-600 dark:text-green-500 bg-green-100 dark:bg-green-900/30',
   5: 'text-yellow-600 dark:text-yellow-500 bg-yellow-100 dark:bg-yellow-900/30',
@@ -29,6 +33,16 @@ export function getStatusInfo(status: number): {
   className: string;
 } {
   switch (status) {
+    case 1:
+      return {
+        text: statusTexts[1],
+        className: statusColors[1],
+      };
+      case 2:
+      return {
+        text: statusTexts[2],
+        className: statusColors[2],
+      };
     case 3:
       return {
         text: statusTexts[3],
@@ -83,6 +97,8 @@ export function getStatusInfo(status: number): {
 }
 
 export const statusOptions = [
+  { value: 1, label: statusTexts[1] },
+  { value: 2, label: statusTexts[2] },
   { value: 3, label: statusTexts[3] },
   { value: 4, label: statusTexts[4] },
   { value: 5, label: statusTexts[5] },

@@ -21,7 +21,8 @@ function OrderDetailsPage() {
     url: `bot/orders/${id}/`,
     queryKey: ['order', Number(id)],
   });
-
+  console.log(orderData?.data);
+  
   if (!orderData?.data)
     return (
       <EmptyState
@@ -49,7 +50,7 @@ function OrderDetailsPage() {
               <AddressInfoCard address={orderData.data.customer_address} />
             </div>
             <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
-              <PaymentInfoCard payment={orderData.data.payment} />
+              <PaymentInfoCard payment={orderData.data.payment} order={orderData.data} />
               <ItemsInfoCard items={orderData.data.items} />
             </div>
           </div>

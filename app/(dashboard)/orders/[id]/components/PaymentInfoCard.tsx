@@ -12,12 +12,14 @@ import {
 } from './index';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { formatPrice } from '../../utils/formatters';
 
 interface PaymentInfoCardProps {
   payment: Order['payment'] | null;
+  order: Order;
 }
 
-function PaymentInfoCard({ payment }: PaymentInfoCardProps) {
+function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
   const [approveDialogOpen, setApproveDialogOpen] = useState(false);
   const [rejectDialogOpen, setRejectDialogOpen] = useState(false);
   const params = useParams();
@@ -46,7 +48,45 @@ function PaymentInfoCard({ payment }: PaymentInfoCardProps) {
 
       <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
         <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
-          <CardNumberAndAmount payment={payment} />
+          <div className="flex flex-col gap-3 flex-1">
+            <CardNumberAndAmount payment={payment} />
+            <div className="border border-border rounded-lg p-3 space-y-2.5">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">مبلغ اولیه اقلام</span>
+                <span className="font-medium">
+                  {formatPrice(order.items_primary_amount)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">هزینه ارسال </span>
+                <span className="font-medium">
+                  {formatPrice(order.shipping_amount)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">مبلغ نهایی اقلام</span>
+                <span className="font-medium text-muted-foreground">
+                  {formatPrice(order.items_final_amount)}
+                </span>
+              </div>
+              {order.items_primary_amount > order.items_final_amount && (
+                <div className="flex items-center justify-between text-xs pt-2 border-t border-border/50">
+                  <span className="text-muted-foreground">تخفیف</span>
+                  <span className="font-medium text-muted-foreground">
+                    {formatPrice(
+                      order.items_primary_amount - order.items_final_amount
+                    )}
+                  </span>
+                </div>
+              )}
+              <div className="flex items-center justify-between pt-2 border-t border-border">
+                <span className="text-sm font-semibold">مبلغ کل</span>
+                <span className="text-base font-bold text-primary">
+                  {formatPrice(order.total_amount)}
+                </span>
+              </div>
+            </div>
+          </div>
 
           <div className="flex flex-col gap-3">
             <ReceiptImage receiptImageUrl={payment.receipt_image_url} />

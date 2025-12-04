@@ -6,7 +6,6 @@ import { EmptyState, ProductsPagination } from '../../products/components';
 import { OrdersHeader, DesktopTable, MobileTable } from './index';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-
 function OrderList() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -17,8 +16,7 @@ function OrderList() {
     error,
   } = useGetData<OrdersResponse>({
     url: `bot/orders/?${searchParams.toString()}`,
-    queryKey: ['orders' , searchParams.toString()],
-    
+    queryKey: ['orders', searchParams.toString()],
   });
   const orders = ordersData?.data.results;
   const totalOrders = ordersData?.data.count;

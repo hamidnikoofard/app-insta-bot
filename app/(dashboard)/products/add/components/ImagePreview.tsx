@@ -31,9 +31,7 @@ function ImagePreview({
         unoptimized={true}
       />
       {isExisting ? (
-        <div className="absolute top-1 right-1 px-1.5 py-0.5 bg-primary/90 text-primary-foreground text-[10px] rounded">
-         
-        </div>
+        <div className="absolute top-1 right-1 px-1.5 py-0.5 bg-primary/90 text-primary-foreground text-[10px] rounded"></div>
       ) : (
         <>
           {onRemove && (

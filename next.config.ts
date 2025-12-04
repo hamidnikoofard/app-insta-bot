@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'www.598.ir',
-      }
+      },
     ],
   },
 };

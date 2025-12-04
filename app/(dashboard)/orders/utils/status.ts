@@ -1,6 +1,6 @@
 export const statusTexts = {
-  1: "در انتظار پرداخت ",
-  2 : 'در اتنظار دریافت آدرس',
+  1: 'در انتظار پرداخت ',
+  2: 'در اتنظار دریافت آدرس',
   3: 'در انتظار تایید پرداخت',
   4: 'تایید پرداخت',
   5: 'در حال بسته بندی',
@@ -38,7 +38,7 @@ export function getStatusInfo(status: number): {
         text: statusTexts[1],
         className: statusColors[1],
       };
-      case 2:
+    case 2:
       return {
         text: statusTexts[2],
         className: statusColors[2],

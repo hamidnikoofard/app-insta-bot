@@ -21,7 +21,7 @@ function OrderDetailsPage() {
     url: `bot/orders/${id}/`,
     queryKey: ['order', Number(id)],
   });
- 
+
   if (!orderData?.data)
     return (
       <EmptyState

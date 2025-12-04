@@ -12,7 +12,12 @@ interface OrderInfoCardProps {
 function OrderInfoCard({ order }: OrderInfoCardProps) {
   return (
     <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm  w-full lg:flex-1">
-      <InfoCardHeader icon={Package} title="اطلاعات سفارش" orderId={order.id} orderStatus={order.status} />
+      <InfoCardHeader
+        icon={Package}
+        title="اطلاعات سفارش"
+        orderId={order.id}
+        orderStatus={order.status}
+      />
 
       <div className="p-6 space-y-5">
         <div className="flex items-start justify-between gap-4">
@@ -30,7 +35,6 @@ function OrderInfoCard({ order }: OrderInfoCardProps) {
           />
           <TotalAmountItem totalAmount={order.total_amount} />
         </div>
-
       </div>
     </div>
   );

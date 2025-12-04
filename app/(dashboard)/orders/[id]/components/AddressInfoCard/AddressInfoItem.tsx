@@ -21,7 +21,7 @@ export function AddressInfoItem({
 }: AddressInfoItemProps) {
   return (
     <div
-      className={`flex items-center justify-between gap-4 p-4 rounded-lg ${containerClassName} transition-colors border border-transparent hover:border-border/50`}
+      className={`flex items-center justify-between gap-4 p-4 rounded-lg ${containerClassName} border border-transparent`}
     >
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <div

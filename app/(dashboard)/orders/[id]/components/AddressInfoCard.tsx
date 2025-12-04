@@ -19,7 +19,7 @@ function AddressInfoCard({ address }: AddressInfoCardProps) {
     );
   }
   return (
-    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm hover:shadow-md transition-all duration-300 w-full lg:flex-1">
+    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm w-full lg:flex-1">
       <AddressInfoCardHeader />
 
       <div className="p-6 space-y-5">

@@ -16,8 +16,8 @@ function DesktopTable({ orders }: DesktopTableProps) {
       <table className="w-full table-fixed">
         <thead className="bg-muted/50 border-b border-border">
           <tr>
-            <th className="text-right p-4 font-medium text-sm w-[20%]">
-              <div className="flex items-center justify-start gap-1.5">
+            <th className="text-center p-4 font-medium text-sm w-[20%]">
+              <div className="flex items-center justify-center gap-1.5">
                 <Hash className="text-muted-foreground" size={16} />
                 شناسه
               </div>
@@ -58,8 +58,8 @@ function DesktopTable({ orders }: DesktopTableProps) {
 function OrderRow({ order }: { order: Orders }) {
   return (
     <tr className="border-b border-border last:border-b-0 hover:bg-muted/30 transition-colors">
-      <td className="text-start p-4">
-        <div className="font-medium text-muted-foreground">{order.id}#</div>
+      <td className="text-center p-4">
+        <div className="font-medium text-muted-foreground">{order.id}</div>
       </td>
       <td className="text-center p-4">
         <div className="font-medium text-muted-foreground text-sm flex items-start justify-center gap-1.5">
@@ -73,7 +73,7 @@ function OrderRow({ order }: { order: Orders }) {
       </td>
       <td className="text-center p-4">
         <div className="flex justify-center items-center gap-2">
-          <StatusChangeDialog order={order} />
+          <StatusChangeDialog orderId={order.id} orderStatus={order.status} />
         </div>
       </td>
       <td className="text-center p-4">

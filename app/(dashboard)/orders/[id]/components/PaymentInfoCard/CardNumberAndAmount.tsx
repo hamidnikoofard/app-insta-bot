@@ -14,9 +14,9 @@ function CardNumberAndAmount({ payment }: CardNumberAndAmountProps) {
       <div className="p-3 sm:p-4">
         <div className="flex items-start justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-            <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 text-primary shrink-0 shadow-sm">
+            {/* <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 text-primary shrink-0 shadow-sm">
               <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
+            </div> */}
             <div className="flex flex-col gap-2 sm:gap-3 flex-1 min-w-0">
               {/* Card Number */}
               <div className="flex flex-col gap-1 sm:gap-1.5">
@@ -24,7 +24,7 @@ function CardNumberAndAmount({ payment }: CardNumberAndAmountProps) {
                   شماره کارت
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm sm:text-base lg:text-lg font-bold text-foreground  tracking-wider break-all">
+                  <span className="text-sm sm:text-base lg:text-base font-bold text-foreground  tracking-wider break-all">
                     {formatCardNumber(payment.card_number)}
                   </span>
                 </div>

@@ -35,6 +35,7 @@ export function usePaymentStatusChange({
       }
 
       queryClient.invalidateQueries({ queryKey: ['order', orderId] });
+      queryClient.invalidateQueries({ queryKey: ['orders', 'order', orderId] });
       queryClient.invalidateQueries({ queryKey: ['orders'] });
       toast.success(
         newStatus === 'true'

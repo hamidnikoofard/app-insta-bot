@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Loading } from '@/components/ui';
-import { OrderList } from './components';
+import { OrdersPageContent } from './components/OrdersPageContent';
 
 export const metadata: Metadata = {
   title: 'سفارشات - Insta Bot',
@@ -13,7 +13,7 @@ export default function OrdersPage() {
     <Suspense
       fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
     >
-      <OrderList />
+      <OrdersPageContent />
     </Suspense>
   );
 }

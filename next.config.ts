@@ -29,6 +29,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.598.ir',
       },
+      {
+        protocol: 'https',
+        hostname: 'direshop.shop',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.598.ir',
+      },
     ],
   },
 };

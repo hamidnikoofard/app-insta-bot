@@ -11,16 +11,21 @@ interface OrderInfoCardProps {
 
 function OrderInfoCard({ order }: OrderInfoCardProps) {
   return (
-    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm hover:shadow-md transition-all duration-300 w-full lg:flex-1">
-      <InfoCardHeader icon={Package} title="اطلاعات سفارش" />
+    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm w-full lg:flex-1">
+      <InfoCardHeader
+        icon={Package}
+        title="اطلاعات سفارش"
+        orderId={order.id}
+        orderStatus={order.status}
+      />
 
-      <div className="p-6 space-y-5">
-        <div className="flex items-start justify-between gap-4">
-          <OrderInfoItem
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+        <div className="flex flex-col sm:flex-row items-stretch gap-3 sm:gap-4">
+          {/* <OrderInfoItem
             icon={Hash}
             label="شناسه سفارش"
             value={order.id || 0}
-          />
+          /> */}
           <OrderInfoItem
             icon={Calendar}
             label="تاریخ سفارش"
@@ -28,9 +33,8 @@ function OrderInfoCard({ order }: OrderInfoCardProps) {
             iconBgColor="bg-secondary/10"
             iconColor="text-secondary"
           />
+          <TotalAmountItem totalAmount={order.total_amount} />
         </div>
-
-        <TotalAmountItem totalAmount={order.total_amount} />
       </div>
     </div>
   );

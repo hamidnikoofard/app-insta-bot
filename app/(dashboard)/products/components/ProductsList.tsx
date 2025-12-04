@@ -24,7 +24,7 @@ function ProductsList() {
     isLoading,
     error,
   } = useGetData<ProductsResponse>({
-    url: `bot/products?${searchParams.toString()}`,
+    url: `bot/products/?${searchParams.toString()}`,
     queryKey: ['products', searchParams.toString()],
   });
 
@@ -74,7 +74,7 @@ function ProductsList() {
 
   return (
     <>
-      <div className="relative w-full min-h-[calc(100vh-12rem)] px-4 pb-8">
+      <div className="relative w-full min-h-[calc(100vh-12rem)] pb-8">
         {isLoading && (
           <Loading isLoading={true} message="در حال دریافت محصولات..." />
         )}

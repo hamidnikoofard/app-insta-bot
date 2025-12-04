@@ -21,17 +21,16 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
       <table className="w-full">
         <thead className="bg-muted/50 border-b border-border">
           <tr>
-            <th className="text-right p-4 font-medium text-sm">آیدی</th>
-            <th className="text-right p-4 font-medium text-sm">عکس</th>
-            <th className="text-right p-4 font-medium text-sm">نام محصول</th>
-            <th className="text-right p-4 font-medium text-sm">شناسه یکتا</th>
-            <th className="text-right p-4 font-medium text-sm">موجودی</th>
-            <th className="text-right p-4 font-medium text-sm">قیمت</th>
-            <th className="text-right p-4 font-medium text-sm">
+            <th className="text-center p-4 font-medium text-sm">آیدی</th>
+            <th className="text-center p-4 font-medium text-sm">عکس</th>
+            <th className="text-center p-4 font-medium text-sm">نام محصول</th>
+            <th className="text-center p-4 font-medium text-sm">شناسه یکتا</th>
+            <th className="text-center p-4 font-medium text-sm">موجودی</th>
+            <th className="text-center p-4 font-medium text-sm">قیمت</th>
+            <th className="text-center p-4 font-medium text-sm">
               قیمت با تخفیف
             </th>
-            <th className="text-right p-4 font-medium text-sm">توضیحات</th>
-            <th className="text-right p-4 font-medium text-sm">عملیات</th>
+            <th className="text-center p-4 font-medium text-sm">عملیات</th>
           </tr>
         </thead>
         <tbody>
@@ -40,52 +39,48 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
               key={product.id}
               className="border-b border-border last:border-b-0 hover:bg-muted/30 transition-colors"
             >
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className="font-medium text-muted-foreground">
                   #{product.id}
                 </div>
               </td>
-              <td className="p-4">
-                <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-muted">
+              <td className="p-4 text-center">
+                <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-muted mx-auto">
                   <Image
-                    src={'/Grand-mil-bl3.webp'}
-                    alt={'product image'}
+                    src={product.main_image_url || ''}
+                    alt={product.name}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized={true}
                   />
                 </div>
               </td>
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className="font-medium">{product.name}</div>
               </td>
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className=" text-sm text-muted-foreground">
                   {product.unique_name ? product.unique_name : product.id}
                 </div>
               </td>
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className="font-medium">{product.stock}</div>
               </td>
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className="text-muted-foreground line-through">
                   {formatPrice(product.primary_cost)} تومان
                 </div>
               </td>
-              <td className="p-4">
+              <td className="p-4 text-center">
                 <div className="font-medium text-primary">
                   {product.final_cost && product.final_cost > 0
                     ? `${formatPrice(product.final_cost)} تومان`
                     : '-'}
                 </div>
               </td>
-              <td className="p-4">
-                <div className="text-sm text-muted-foreground max-w-xs truncate">
-                  {product.description}
-                </div>
-              </td>
-              <td className="p-4">
-                <div className="flex items-center gap-2">
+              <td className="p-4 text-center">
+                <div className="flex items-center gap-2 justify-center">
                   <TooltipWrapper
                     delayDuration={0}
                     content="ویرایش محصول"

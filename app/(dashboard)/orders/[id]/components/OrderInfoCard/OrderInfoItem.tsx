@@ -25,17 +25,21 @@ export function OrderInfoItem({
 
   return (
     <div
-      className={`flex items-center justify-between gap-4 p-4 rounded-lg ${containerClassName} transition-colors border border-transparent hover:border-border/50`}
+      className={`flex items-center justify-between gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg ${containerClassName} transition-colors border border-transparent`}
     >
-      <div className="flex items-center gap-3 flex-1 min-w-0">
+      <div className="flex items-center gap-2.5 sm:gap-3 flex-1 min-w-0">
         <div
-          className={`flex items-center justify-center w-9 h-9 rounded-md ${iconBgColor} ${iconColor} shrink-0`}
+          className={`flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-md ${iconBgColor} ${iconColor} shrink-0`}
         >
-          <Icon className="w-4 h-4" />
+          <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-xs text-muted-foreground mb-1">{label}</div>
-          <div className={`${valueClassName} text-foreground`}>
+          <div className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+            {label}
+          </div>
+          <div
+            className={`text-sm sm:text-base font-semibold text-foreground break-words`}
+          >
             {displayValue}
           </div>
         </div>

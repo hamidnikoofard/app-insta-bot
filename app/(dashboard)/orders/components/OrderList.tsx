@@ -15,8 +15,8 @@ function OrderList() {
     isError,
     error,
   } = useGetData<OrdersResponse>({
-    url: `bot/orders?${searchParams.toString()}`,
-    queryKey: ['orders'],
+    url: `bot/orders/?${searchParams.toString()}`,
+    queryKey: ['orders', searchParams.toString()],
   });
   const orders = ordersData?.data.results;
   const totalOrders = ordersData?.data.count;

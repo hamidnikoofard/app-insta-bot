@@ -24,7 +24,7 @@ function OrderCard({ order }: { order: Orders }) {
     <div className="bg-muted/30 border border-border rounded-lg p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="font-medium text-base">سفارش #{order.id}</h3>
-        <StatusChangeDialog order={order} />
+        <StatusChangeDialog orderId={order.id} orderStatus={order.status} />
       </div>
 
       <div className="space-y-2 text-sm">

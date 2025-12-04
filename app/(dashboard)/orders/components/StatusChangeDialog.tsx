@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,6 @@ import {
   badgeVariants,
 } from '@/components/ui';
 import { getStatusInfo, statusOptions } from '../utils/status';
-import { Orders } from '../type';
 import { cn } from '@/lib/utils';
 import { Edit } from 'lucide-react';
 import { API_BASE_URL } from '@/lib/fetch';
@@ -24,16 +23,22 @@ import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface StatusChangeDialogProps {
-  order: Orders;
+  orderId: number;
+  orderStatus: number;
 }
 
-function StatusChangeDialog({ order }: StatusChangeDialogProps) {
+function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
   const [open, setOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(order.status);
+  const [selectedStatus, setSelectedStatus] = useState(orderStatus);
   const queryClient = useQueryClient();
+
+  // همگام‌سازی selectedStatus با orderStatus وقتی prop تغییر می‌کند
+  useEffect(() => {
+    setSelectedStatus(orderStatus);
+  }, [orderStatus]);
   const handleStatusChange = async (newStatus: number) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/bot/orders/${order.id}/`, {
+      const response = await fetch(`${API_BASE_URL}/bot/orders/${orderId}/`, {
         method: 'PATCH',
         body: JSON.stringify({ status: newStatus }),
         headers: {
@@ -45,7 +50,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
         throw new Error('Failed to change order status');
       }
       toast.success('وضعیت سفارش با موفقیت تغییر کرد');
-      queryClient.invalidateQueries({ queryKey: ['orders'] });
+      queryClient.invalidateQueries({ queryKey: ['orders', 'order', orderId] });
       setSelectedStatus(newStatus);
       setOpen(false);
     } catch (error) {
@@ -55,7 +60,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    if (!isOpen) setSelectedStatus(order.status);
+    if (!isOpen) setSelectedStatus(orderStatus);
   };
 
   return (
@@ -78,7 +83,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-right">
-            تغییر وضعیت سفارش #{order.id}
+            تغییر وضعیت سفارش #{orderId}
           </DialogTitle>
           <DialogDescription className="text-right">
             وضعیت فعلی: {getStatusInfo(selectedStatus).text}
@@ -86,7 +91,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
         </DialogHeader>
         <div className="py-4">
           <RadioGroup
-            value={selectedStatus.toString()}
+            value={selectedStatus?.toString()}
             onValueChange={(value) => setSelectedStatus(Number(value))}
             className="space-y-3"
           >
@@ -97,11 +102,11 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
               >
                 <RadioGroupItem
                   value={option.value.toString()}
-                  id={`status-${order.id}-${option.value}`}
+                  id={`status-${orderId}-${option.value}`}
                   className="cursor-pointer"
                 />
                 <Label
-                  htmlFor={`status-${order.id}-${option.value}`}
+                  htmlFor={`status-${orderId}-${option.value}`}
                   className="cursor-pointer text-right"
                 >
                   {option.label}
@@ -115,7 +120,7 @@ function StatusChangeDialog({ order }: StatusChangeDialogProps) {
             type="button"
             variant="default"
             onClick={() => handleStatusChange(selectedStatus)}
-            disabled={selectedStatus === order.status}
+            disabled={selectedStatus === orderStatus}
           >
             ذخیره تغییرات
           </Button>

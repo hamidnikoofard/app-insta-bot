@@ -43,7 +43,7 @@ function OrderList() {
       {isLoading && (
         <Loading isLoading={true} message="در حال دریافت سفارشات..." />
       )}
-      {!isLoading && (
+      {!isLoading && ordersData && (
         <div className="w-full space-y-6">
           {orders?.length === 0 ? (
             <EmptyState

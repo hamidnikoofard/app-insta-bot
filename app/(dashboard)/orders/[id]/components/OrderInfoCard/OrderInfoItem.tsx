@@ -34,8 +34,12 @@ export function OrderInfoItem({
           <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">{label}</div>
-          <div className={`text-sm sm:text-base font-semibold text-foreground break-words`}>
+          <div className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+            {label}
+          </div>
+          <div
+            className={`text-sm sm:text-base font-semibold text-foreground break-words`}
+          >
             {displayValue}
           </div>
         </div>

@@ -99,4 +99,3 @@ function ItemsTabletTable({ items }: ItemsTabletTableProps) {
 }
 
 export { ItemsTabletTable };
-

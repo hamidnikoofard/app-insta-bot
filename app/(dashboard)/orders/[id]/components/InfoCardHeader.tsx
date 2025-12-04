@@ -26,7 +26,9 @@ export function InfoCardHeader({
         >
           <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
-        <h2 className="text-base sm:text-xl font-bold text-foreground truncate">{title}</h2>
+        <h2 className="text-base sm:text-xl font-bold text-foreground truncate">
+          {title}
+        </h2>
       </div>
       {orderId && orderStatus && (
         <div className="shrink-0">

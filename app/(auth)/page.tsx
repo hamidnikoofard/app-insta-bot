@@ -16,6 +16,8 @@ import {
 } from '@/app/(auth)/schemas/loginSchema';
 import { loginAction } from './action';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 function Page() {
   const {
@@ -27,8 +29,10 @@ function Page() {
     resolver: zodResolver(loginSchema),
   });
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: LoginFormData) => {
+    setIsLoading(true);
     const result = await loginAction(data);
     if (result.success) {
       reset();
@@ -62,8 +66,8 @@ function Page() {
         </div>
 
         <div className="space-y-3 mt-8">
-          <Button type="submit" className="w-full" size="lg">
-            ورود
+          <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'ورود'}
           </Button>
           <AuthLink href="/register" text="حساب کاربری ندارید؟ ثبت نام کنید" />
         </div>

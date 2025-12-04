@@ -46,14 +46,20 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
               </td>
               <td className="p-4 text-center">
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-muted mx-auto">
-                  <Image
-                    src={product.main_image_url || ''}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    unoptimized={true}
-                  />
+                  {product.main_image_url && product.main_image_url.trim() !== '' ? (
+                    <Image
+                      src={product.main_image_url}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized={true}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                      <p className="text-xs text-muted-foreground">بدون عکس</p>
+                    </div>
+                  )}
                 </div>
               </td>
               <td className="p-4 text-center">

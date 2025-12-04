@@ -53,8 +53,14 @@ function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
             <div className="border border-border rounded-lg p-3 space-y-2.5">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">مبلغ اولیه اقلام</span>
-                <span className="font-medium">
+                <span className="font-medium text-muted-foreground">
                   {formatPrice(order.items_primary_amount)}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">مبلغ نهایی اقلام</span>
+                <span className="font-medium text-foreground">
+                  {formatPrice(order.items_final_amount)}
                 </span>
               </div>
               <div className="flex items-center justify-between text-sm">
@@ -63,14 +69,9 @@ function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
                   {formatPrice(order.shipping_amount)}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">مبلغ نهایی اقلام</span>
-                <span className="font-medium text-muted-foreground">
-                  {formatPrice(order.items_final_amount)}
-                </span>
-              </div>
+
               {order.items_primary_amount > order.items_final_amount && (
-                <div className="flex items-center justify-between text-xs pt-2 border-t border-border/50">
+                <div className="flex items-center justify-between text-xs pt-2 border-t border-border">
                   <span className="text-muted-foreground">تخفیف</span>
                   <span className="font-medium text-muted-foreground">
                     {formatPrice(

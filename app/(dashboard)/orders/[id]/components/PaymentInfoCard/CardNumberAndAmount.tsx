@@ -10,7 +10,7 @@ interface CardNumberAndAmountProps {
 
 function CardNumberAndAmount({ payment }: CardNumberAndAmountProps) {
   return (
-    <div className="group relative overflow-hidden rounded-lg border border-border/50 w-full lg:w-auto">
+    <div className="group relative overflow-hidden rounded-lg border border-border w-full lg:w-auto">
       <div className="p-3 sm:p-4">
         <div className="flex items-start justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">

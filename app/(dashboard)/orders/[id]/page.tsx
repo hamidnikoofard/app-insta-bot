@@ -22,7 +22,7 @@ function OrderDetailsPage() {
     queryKey: ['order', Number(id)],
   });
   console.log(orderData?.data);
-  
+
   if (!orderData?.data)
     return (
       <EmptyState
@@ -31,29 +31,38 @@ function OrderDetailsPage() {
       />
     );
   return (
-    <div className="relative w-full min-h-[calc(100vh-12rem)] px-4 pb-8">
+    <div className="relative w-full min-h-[calc(100vh-12rem)] px-3 sm:px-4 pb-6 sm:pb-8">
       {isLoading && (
         <Loading isLoading={true} message="در حال دریافت سفارش..." />
       )}
       {!isLoading && (
-        <div className="w-full space-y-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">سفارش {orderData?.data.id}</h1>
-            <Button variant="outline" onClick={() => router.back()}>
+        <div className="w-full space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+            <h1 className="text-xl sm:text-2xl font-bold">
+              سفارش {orderData?.data.id}
+            </h1>
+            <Button
+              variant="outline"
+              onClick={() => router.back()}
+              className="w-full sm:w-auto"
+            >
               بازگشت
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </div>
-          <div className="flex flex-col lg:flex-row items-start gap-4">
+          <div className="flex flex-col lg:flex-row items-stretch gap-4">
             <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
               <OrderInfoCard order={orderData.data} />
               <AddressInfoCard address={orderData.data.customer_address} />
             </div>
             <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
-              <PaymentInfoCard payment={orderData.data.payment} order={orderData.data} />
-              <ItemsInfoCard items={orderData.data.items} />
+              <PaymentInfoCard
+                payment={orderData.data.payment}
+                order={orderData.data}
+              />
             </div>
           </div>
+          <ItemsInfoCard items={orderData.data.items} />
         </div>
       )}
     </div>

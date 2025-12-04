@@ -11,7 +11,7 @@ interface OrderInfoCardProps {
 
 function OrderInfoCard({ order }: OrderInfoCardProps) {
   return (
-    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm  w-full lg:flex-1">
+    <div className="relative overflow-hidden border border-border rounded-xl bg-card shadow-sm w-full lg:flex-1">
       <InfoCardHeader
         icon={Package}
         title="اطلاعات سفارش"
@@ -19,8 +19,8 @@ function OrderInfoCard({ order }: OrderInfoCardProps) {
         orderStatus={order.status}
       />
 
-      <div className="p-6 space-y-5">
-        <div className="flex items-start gap-4">
+      <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+        <div className="flex flex-col sm:flex-row items-stretch gap-3 sm:gap-4">
           {/* <OrderInfoItem
             icon={Hash}
             label="شناسه سفارش"

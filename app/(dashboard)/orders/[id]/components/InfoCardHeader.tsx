@@ -19,17 +19,19 @@ export function InfoCardHeader({
   orderStatus,
 }: InfoCardHeaderProps) {
   return (
-    <div className="relative p-6 border-b border-border bg-muted/20 flex items-center justify-between">
-      <div className="flex items-center gap-3">
+    <div className="relative p-4 sm:p-6 border-b border-border bg-muted/20 flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
         <div
-          className={`flex items-center justify-center w-10 h-10 rounded-lg ${iconBgColor} ${iconColor}`}
+          className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${iconBgColor} ${iconColor} shrink-0`}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
-        <h2 className="text-xl font-bold text-foreground">{title}</h2>
+        <h2 className="text-base sm:text-xl font-bold text-foreground truncate">{title}</h2>
       </div>
       {orderId && orderStatus && (
-        <StatusChangeDialog orderId={orderId} orderStatus={orderStatus} />
+        <div className="shrink-0">
+          <StatusChangeDialog orderId={orderId} orderStatus={orderStatus} />
+        </div>
       )}
     </div>
   );

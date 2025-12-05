@@ -92,7 +92,7 @@ export default function DashboardLayout({
             />
             <main className="flex-1 pb-20 md:pb-0">
               <div
-                className={`rounded-xl shadow-sm min-h-[calc(100vh-12rem)] ${isOpen ? 'md:px-20 px-4' : 'md:px-44 px-4'}`}
+                className={`rounded-xl shadow-sm min-h-[calc(100vh-12rem)] ${isOpen ? 'md:px-15 px-4' : 'md:px-44 px-4'}`}
               >
                 {children}
               </div>

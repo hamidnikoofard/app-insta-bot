@@ -29,7 +29,7 @@ export const navItems: NavItem[] = [
     ],
   },
   { label: 'سفارشات', href: '/orders', icon: ShoppingCart },
-  { label: ' تنظیمات پیام', href: '/settings-message', icon: MessageCircle },
-  { label: 'پیام ها', href: '/messages', icon: MessageSquare },
+  // { label: ' تنظیمات پیام', href: '/settings-message', icon: MessageCircle },
+  // { label: 'پیام ها', href: '/messages', icon: MessageSquare },
   { label: 'پروفایل', href: '/profile', icon: User },
 ];

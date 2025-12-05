@@ -25,21 +25,20 @@ function MobileCards({ products, onUpdate, onDelete }: MobileCardsProps) {
         >
           <div className="flex gap-4">
             <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-muted shrink-0">
-              {
-                product.main_image_url && product.main_image_url.trim() !== '' ? (
-                  <Image
-                    src={product.main_image_url}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-muted flex items-center justify-center">
-                    <p className="text-sm text-muted-foreground">عکس محصول</p>
-                  </div>
-                )
-              }
+              {product.main_image_url &&
+              product.main_image_url.trim() !== '' ? (
+                <Image
+                  src={product.main_image_url}
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="w-full h-full bg-muted flex items-center justify-center">
+                  <p className="text-sm text-muted-foreground">عکس محصول</p>
+                </div>
+              )}
             </div>
             <div className="flex-1 space-y-2">
               <div className="flex items-center justify-between">

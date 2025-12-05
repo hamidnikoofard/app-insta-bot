@@ -63,6 +63,14 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
     if (!isOpen) setSelectedStatus(orderStatus);
   };
 
+  const shouldDisableOption = (optionValue: number) => {
+    const hasPassedPaymentApproval = orderStatus >= 4;
+    return hasPassedPaymentApproval && optionValue < 4;
+  };
+  useEffect(() => {
+    shouldDisableOption(selectedStatus);
+  }, [orderStatus]);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -104,6 +112,7 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
                   value={option.value.toString()}
                   id={`status-${orderId}-${option.value}`}
                   className="cursor-pointer"
+                  disabled={shouldDisableOption(option.value)}
                 />
                 <Label
                   htmlFor={`status-${orderId}-${option.value}`}

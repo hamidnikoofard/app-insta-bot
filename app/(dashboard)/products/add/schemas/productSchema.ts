@@ -9,6 +9,8 @@ const productSchema = z.object({
   setProductId: z.string().optional(),
   stock: z.string().min(1, { message: 'موجودی الزامی است' }),
   unique_name: z.string().optional(),
+  existing_images: z.array(z.number()).optional(),
+  new_images: z.array(z.instanceof(File)).optional(),
 });
 
 export default productSchema;

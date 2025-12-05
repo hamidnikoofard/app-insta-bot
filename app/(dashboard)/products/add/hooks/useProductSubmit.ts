@@ -7,13 +7,29 @@ import { ProductFormData } from './useProductForm';
 
 export function useProductSubmit(productId: string | null) {
   const [pending, setPending] = useState(false);
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const submitProduct = async (data: ProductFormData) => {
     if (pending) return;
     setPending(true);
-    console.log(data);
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('primary_cost', data.primary_cost);
+    formData.append('stock', data.stock);
+    formData.append('final_cost', data.final_cost || '');
+    formData.append('unique_name', data.unique_name || '');
+
+    data.existing_images?.forEach((imageId) => {
+      formData.append('existing_images', imageId.toString());
+    });
+
+    // Append new image files (each file separately)
+    if (data.new_images && data.new_images.length > 0) {
+      data.new_images.forEach((file) => {
+        formData.append('new_images', file);
+      });
+    }
 
     try {
       const url = productId
@@ -23,10 +39,7 @@ export function useProductSubmit(productId: string | null) {
 
       const response = await fetch(url, {
         method,
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        body: formData,
         credentials: 'include',
       });
 
@@ -47,7 +60,6 @@ export function useProductSubmit(productId: string | null) {
       toast.success(
         productId ? 'محصول با موفقیت ویرایش شد' : 'محصول با موفقیت ثبت شد'
       );
-      router.push('/products');
     } catch (error) {
       toast.error(
         error instanceof Error

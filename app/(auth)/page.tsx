@@ -66,7 +66,12 @@ function Page() {
         </div>
 
         <div className="space-y-3 mt-8">
-          <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full"
+            size="lg"
+            disabled={isLoading}
+          >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'ورود'}
           </Button>
           <AuthLink href="/register" text="حساب کاربری ندارید؟ ثبت نام کنید" />

@@ -46,7 +46,8 @@ function DesktopTable({ products, onUpdate, onDelete }: DesktopTableProps) {
               </td>
               <td className="p-4 text-center">
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-muted mx-auto">
-                  {product.main_image_url && product.main_image_url.trim() !== '' ? (
+                  {product.main_image_url &&
+                  product.main_image_url.trim() !== '' ? (
                     <Image
                       src={product.main_image_url}
                       alt={product.name}

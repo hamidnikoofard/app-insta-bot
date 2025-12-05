@@ -48,7 +48,7 @@ function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
 
       <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
         <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
-          <div className="flex flex-col gap-3 w-1/2">
+          <div className="flex flex-col gap-3 w-full lg:w-1/2">
             <CardNumberAndAmount payment={payment} />
             <div className="border border-border rounded-lg p-3 space-y-2.5">
               <div className="flex items-center justify-between">
@@ -89,7 +89,7 @@ function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 w-1/2">
+          <div className="flex flex-col gap-3 w-full lg:w-1/2">
             <ReceiptImage receiptImageUrl={payment.receipt_image_url} />
 
             {canChangeStatus === 2 ? (

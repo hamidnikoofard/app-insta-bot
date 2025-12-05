@@ -25,7 +25,11 @@ function SidebarFooter({ isOpen }: SidebarFooterProps) {
     }
   };
   return (
-    <div className="border-t border-border/40 p-3 shrink-0">
+    <div
+      className={`border-t border-border/40 p-3 shrink-0 ${
+        isOpen ? 'mb-20 md:mb-0' : ''
+      }`}
+    >
       {isOpen ? (
         <Button
           variant="ghost"

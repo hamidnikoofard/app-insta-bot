@@ -51,21 +51,21 @@ function PaymentInfoCard({ payment, order }: PaymentInfoCardProps) {
           <div className="flex flex-col gap-3 flex-1">
             <CardNumberAndAmount payment={payment} />
             <div className="border border-border rounded-lg p-3 space-y-2.5">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">مبلغ اولیه اقلام</span>
-                <span className="font-medium text-muted-foreground">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground text-xs text-nowrap">مبلغ اولیه اقلام</span>
+                <span className="font-medium text-muted-foreground text-sm">
                   {formatPrice(order.items_primary_amount)}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">مبلغ نهایی اقلام</span>
-                <span className="font-medium text-foreground">
+              <div className="flex items-center justify-between ">
+                <span className="text-muted-foreground text-xs text-nowrap">مبلغ نهایی اقلام</span>
+                <span className="font-medium text-foreground text-sm">
                   {formatPrice(order.items_final_amount)}
                 </span>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">هزینه ارسال </span>
-                <span className="font-medium">
+              <div className="flex items-center justify-between">
+                <span className="text-muted-foreground text-xs text-nowrap">هزینه ارسال </span>
+                <span className="font-medium text-sm">
                   {formatPrice(order.shipping_amount)}
                 </span>
               </div>

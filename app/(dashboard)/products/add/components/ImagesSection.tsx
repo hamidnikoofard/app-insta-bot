@@ -33,7 +33,6 @@ export function ImagesSection({
   const handleClick = () => {
     fileInputRef.current?.click();
   };
-  console.log(existingImages);
 
   return (
     <div className="space-y-4">

@@ -22,7 +22,6 @@ function OrderDetailsPage() {
     queryKey: ['order', Number(id)],
   });
   console.log(orderData?.data);
-
   if (!orderData?.data)
     return (
       <EmptyState

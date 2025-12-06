@@ -17,6 +17,7 @@ function OrderInfoCard({ order }: OrderInfoCardProps) {
         title="اطلاعات سفارش"
         orderId={order.id}
         orderStatus={order.status}
+        orderPaymentStatus={order.payment.status}
       />
 
       <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">

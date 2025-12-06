@@ -18,6 +18,7 @@ function OrderList() {
     url: `bot/orders/?${searchParams.toString()}`,
     queryKey: ['orders', searchParams.toString()],
   });
+  console.log(ordersData?.data);
   const orders = ordersData?.data.results;
   const totalOrders = ordersData?.data.count;
   const totalPages = Math.ceil((totalOrders || 0) / 10);

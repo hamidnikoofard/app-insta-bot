@@ -45,7 +45,7 @@ function BasicInformationSection({
       </div>
 
       {/* Product Name */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="space-y-2 w-full flex-1">
           <Label htmlFor="name" className="text-sm font-medium">
             نام محصول <span className="text-destructive">*</span>
@@ -69,7 +69,7 @@ function BasicInformationSection({
             </p>
           )}
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 w-full md:w-auto">
           <TooltipWrapper
             content="این قسمت اختیاری است و در صورتی که خالی بماند، شناسه به صورت خودکار تولید می‌شود."
             contentProps={{ side: 'top' }}

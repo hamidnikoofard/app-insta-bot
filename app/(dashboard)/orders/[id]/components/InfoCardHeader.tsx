@@ -8,7 +8,6 @@ interface InfoCardHeaderProps {
   iconColor?: string;
   orderId?: number;
   orderStatus?: number;
-  orderPaymentStatus?: number;
 }
 
 export function InfoCardHeader({
@@ -18,7 +17,6 @@ export function InfoCardHeader({
   iconColor = 'text-primary',
   orderId,
   orderStatus,
-  orderPaymentStatus,
 }: InfoCardHeaderProps) {
   return (
     <div className="relative p-4 sm:p-6 border-b border-border bg-muted/20 flex items-center justify-between gap-3">
@@ -34,11 +32,7 @@ export function InfoCardHeader({
       </div>
       {orderId && orderStatus && (
         <div className="shrink-0">
-          <StatusChangeDialog
-            orderId={orderId}
-            orderStatus={orderStatus}
-            orderPaymentStatus={orderPaymentStatus}
-          />
+          <StatusChangeDialog orderId={orderId} orderStatus={orderStatus} />
         </div>
       )}
     </div>

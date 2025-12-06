@@ -17,7 +17,6 @@ export function OrderInfoItem({
   value,
   iconBgColor = 'bg-primary/10',
   iconColor = 'text-primary',
-  valueClassName = 'text-base font-semibold',
   containerClassName = 'bg-muted/30 hover:bg-muted/50',
 }: OrderInfoItemProps) {
   const displayValue =
@@ -38,7 +37,7 @@ export function OrderInfoItem({
             {label}
           </div>
           <div
-            className={`text-sm sm:text-base font-semibold text-foreground break-words`}
+            className={`text-sm sm:text-base font-semibold text-foreground wrap-break-word`}
           >
             {displayValue}
           </div>

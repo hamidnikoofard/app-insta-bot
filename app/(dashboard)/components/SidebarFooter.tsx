@@ -1,5 +1,6 @@
 'use client';
 import { Button, TooltipWrapper } from '@/components/ui';
+import { API_BASE_URL } from '@/lib/fetch';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -11,29 +12,38 @@ interface SidebarFooterProps {
 function SidebarFooter({ isOpen }: SidebarFooterProps) {
   const router = useRouter();
   const handleLogout = async () => {
-    const response = await fetch(`/api/logout`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/logout/`, {
+        method: 'delete',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    if (data.success) {
+      if (response.ok || response.status === 204) {
+        router.push('/');
+        toast.success('با موفقیت خارج شدید');
+      } else {
+        toast.error('خطا در خروج از حساب کاربری');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+
       router.push('/');
-      toast.success(data.message);
-    } else {
-      toast.error(data.message);
+      toast.success('با موفقیت خارج شدید');
     }
   };
   return (
     <div
-      className={`border-t border-border/40 p-3 shrink-0 ${
-        isOpen ? 'mb-20 md:mb-0' : ''
+      className={`md:border-t border-border/40 p-3 shrink-0 ${
+        isOpen ? 'mb-80 md:mb-0' : ''
       }`}
     >
       {isOpen ? (
         <Button
-          variant="ghost"
-          className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+          variant="destructive"
+          className="w-full justify-start gap-3"
           onClick={handleLogout}
         >
           <LogOut className="w-5 h-5" />

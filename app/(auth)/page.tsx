@@ -38,8 +38,10 @@ function Page() {
       reset();
       toast.success(result.message);
       router.push('/dashboard');
+      setIsLoading(false);
     } else {
       toast.error(result.message);
+      setIsLoading(false);
     }
   };
 

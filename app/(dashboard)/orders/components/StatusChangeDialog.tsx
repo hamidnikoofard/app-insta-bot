@@ -25,14 +25,9 @@ import { useQueryClient } from '@tanstack/react-query';
 interface StatusChangeDialogProps {
   orderId: number;
   orderStatus: number;
-  orderPaymentStatus?: number;
 }
 
-function StatusChangeDialog({
-  orderId,
-  orderStatus,
-  orderPaymentStatus,
-}: StatusChangeDialogProps) {
+function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
   const [open, setOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(orderStatus);
   const queryClient = useQueryClient();
@@ -65,7 +60,7 @@ function StatusChangeDialog({
   };
 
   const shouldDisableOption = (optionValue: number) => {
-    if (orderPaymentStatus !== undefined && orderPaymentStatus <= 2) {
+    if (orderStatus <= 3) {
       return true;
     }
     const hasPassedPaymentApproval = orderStatus >= 3;

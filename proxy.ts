@@ -22,6 +22,8 @@ export function proxy(request: NextRequest) {
       '/products',
       '/settings-message',
       '/messages',
+      '/orders',
+      '/orders/:path*',
     ];
 
     if (protectedPaths.some((path) => url.pathname.startsWith(path))) {
@@ -41,6 +43,7 @@ export const config = {
     '/introduce-product/:path*',
     '/settings-message/:path*',
     '/messages/:path*',
+    '/orders/:path*',
     '/:path*',
   ],
 };

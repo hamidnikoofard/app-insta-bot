@@ -74,7 +74,7 @@ export function ImagesSection({
             {/* Upload Button */}
             <div
               onClick={handleClick}
-              className="relative aspect-square border-2 border-dashed border-border rounded-lg p-6 sm:p-4 text-center justify-center cursor-pointer transition-colors hover:border-primary/50 hover:bg-primary/5 group"
+              className="relative aspect-square border-2 border-dashed border-border rounded-lg p-2 sm:p-3 text-center cursor-pointer transition-colors hover:border-primary/50 hover:bg-primary/5 group flex items-center justify-center"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -94,13 +94,13 @@ export function ImagesSection({
                 className="hidden"
                 aria-label="آپلود تصاویر"
               />
-              <div className="flex flex-col items-center justify-center h-full gap-2">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                  <Plus className="h-6 w-6" />
+              <div className="flex flex-col items-center justify-center gap-1 sm:gap-1.5 w-full h-full">
+                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                  <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">افزودن تصویر</p>
-                </div>
+                <p className="text-[10px] sm:text-xs text-muted-foreground">
+                  افزودن
+                </p>
               </div>
             </div>
           </div>

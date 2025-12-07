@@ -47,8 +47,8 @@ function OrderList() {
         <div className="w-full space-y-6">
           {orders?.length === 0 ? (
             <EmptyState
-              title="هنوز سفارشی اضافه نشده است"
-              description="برای شروع، روی دکمه 'اضافه کردن سفارش' کلیک کنید و اولین سفارش خود را به سیستم اضافه کنید."
+              title="هنوز سفارشی ثبت نشده است"
+              description=""
             />
           ) : (
             <>

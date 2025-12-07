@@ -4,6 +4,7 @@ import { API_BASE_URL } from '@/lib/fetch';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useQueryClient } from '@/app/QueryProvider';
 
 interface SidebarFooterProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface SidebarFooterProps {
 
 function SidebarFooter({ isOpen }: SidebarFooterProps) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const handleLogout = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/users/logout/`, {
@@ -22,6 +24,7 @@ function SidebarFooter({ isOpen }: SidebarFooterProps) {
       });
 
       if (response.ok || response.status === 204) {
+        queryClient.clear();
         router.push('/');
         toast.success('با موفقیت خارج شدید');
       } else {
@@ -29,7 +32,7 @@ function SidebarFooter({ isOpen }: SidebarFooterProps) {
       }
     } catch (error) {
       console.error('Logout error:', error);
-
+      queryClient.clear();
       router.push('/');
       toast.success('با موفقیت خارج شدید');
     }

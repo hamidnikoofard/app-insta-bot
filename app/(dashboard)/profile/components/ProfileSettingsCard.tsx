@@ -7,9 +7,7 @@ function ProfileSettingsCard() {
           مدیریت تنظیمات و امنیت حساب کاربری
         </p>
       </div>
-      <div className="p-6">
-        
-      </div>
+      <div className="p-6"></div>
     </div>
   );
 }

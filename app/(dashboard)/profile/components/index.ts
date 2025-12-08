@@ -3,3 +3,5 @@ export * from './ProfileContent';
 export * from './ProfileSettingsCard';
 export * from './ProfileSummaryCard';
 export * from './InfoItem';
+export * from './AddShopButton';
+export * from './EditProfileButton';

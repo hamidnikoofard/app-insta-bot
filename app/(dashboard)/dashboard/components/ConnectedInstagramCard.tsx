@@ -22,7 +22,7 @@ function ConnectedInstagramCard({
   instagramUsername,
 }: ConnectedInstagramCardProps) {
   const formattedUsername = instagramUsername ? `${instagramUsername}@` : '@';
-  
+
   return (
     <div className="w-full max-w-sm rounded-2xl border border-border/70 bg-card p-5 shadow-lg shadow-black/5">
       <div className="flex items-center gap-3">

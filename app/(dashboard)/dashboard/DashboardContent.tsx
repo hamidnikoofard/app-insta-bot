@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthProvider';
 
 export function DashboardContent() {
   const { online_shop_status } = useAuth();
-
+  console.log(online_shop_status);
   return (
     <div className="w-full min-h-full py-8 ">
       {online_shop_status !== 4 && (

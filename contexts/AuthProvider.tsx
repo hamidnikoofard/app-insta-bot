@@ -22,6 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     url: 'users/info/',
     queryKey: ['user'],
   });
+  console.log(data);
   if (isLoading)
     return (
       <Loading isLoading={isLoading} message="در حال دریافت اطلاعات کاربر..." />

@@ -3,18 +3,16 @@ import { createContext, useContext } from 'react';
 import useGetData from '@/hooks/useGetData';
 import { ErrorDisplay, Loading } from '@/components/ui';
 
-
-
 interface AuthContextType {
   id: number;
   first_name: string;
   last_name: string;
   phone_number: string;
   online_shop_auto_reply_enabled: boolean;
-  online_shop_card_number:string;
-  online_shop_instagram_username:string;
-  online_shop_shop_name:string;
-  online_shop_status:number;
+  online_shop_card_number: string;
+  online_shop_instagram_username: string;
+  online_shop_shop_name: string;
+  online_shop_status: number;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

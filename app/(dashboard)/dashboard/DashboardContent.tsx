@@ -7,25 +7,24 @@ import { SuccessStep } from './components/SuccessStep';
 import { useAuth } from '@/contexts/AuthProvider';
 
 export function DashboardContent() {
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
+  const { online_shop_status } = useAuth();
 
   return (
     <div className="w-full min-h-full py-8 ">
-      {status !== 4 && (
+      {online_shop_status !== 4 && (
         <div className="mb-8">
-          <StepNavigator currentStatus={status} />
+          <StepNavigator currentStatus={online_shop_status} />
         </div>
       )}
 
       <div className="flex-1">
-        {status === 1 ? (
+        {online_shop_status === 1 ? (
           <ConnectInstagramForm />
-        ) : status === 2 ? (
+        ) : online_shop_status === 2 ? (
           <PendingApprovalStep />
-        ) : status === 3 ? (
+        ) : online_shop_status === 3 ? (
           <InstagramAccessStep />
-        ) : status === 4 ? (
+        ) : online_shop_status === 4 ? (
           <SuccessStep />
         ) : null}
       </div>

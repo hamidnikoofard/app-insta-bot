@@ -9,9 +9,9 @@ interface PageHeaderProps {
 
 function PageHeader({ isEditMode }: PageHeaderProps) {
   const router = useRouter();
-  const newSearchParams = useSearchParams()
-  const page = newSearchParams.get("page")
-   
+  const newSearchParams = useSearchParams();
+  const page = newSearchParams.get('page');
+
   return (
     <div className="mb-6 sm:mb-4">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

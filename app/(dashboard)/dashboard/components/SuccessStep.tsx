@@ -2,8 +2,6 @@
 import { ConnectedInstagramCard } from './index';
 import { useAuth } from '@/contexts';
 
-
-
 function SuccessStep() {
   const { online_shop_instagram_username } = useAuth();
 

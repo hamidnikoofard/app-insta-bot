@@ -46,10 +46,7 @@ function OrderList() {
       {!isLoading && ordersData && (
         <div className="w-full space-y-6">
           {orders?.length === 0 ? (
-            <EmptyState
-              title="هنوز سفارشی ثبت نشده است"
-              description=""
-            />
+            <EmptyState title="هنوز سفارشی ثبت نشده است" description="" />
           ) : (
             <>
               <OrdersHeader totalOrders={totalOrders || 0} />

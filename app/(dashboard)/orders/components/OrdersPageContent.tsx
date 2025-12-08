@@ -37,10 +37,9 @@ const STATUS_CONFIG: Record<number, () => React.ReactElement | null> = {
 };
 
 function OrdersPageContent() {
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
+  const { online_shop_status } = useAuth();
 
-  const renderContent = STATUS_CONFIG[status];
+  const renderContent = STATUS_CONFIG[online_shop_status];
   return renderContent ? renderContent() : null;
 }
 

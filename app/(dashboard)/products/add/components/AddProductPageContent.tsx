@@ -16,8 +16,7 @@ function AddProductPageContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const isEditMode = !!id;
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
+  const { online_shop_status } = useAuth();
 
   // Form management
   const {
@@ -64,12 +63,12 @@ function AddProductPageContent() {
     );
   }
 
-  if (status !== 4) {
+  if (online_shop_status !== 4) {
     return (
       <AccessDenied
         title="پیج اینستاگرام شما وصل نشده است"
         description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
-        status={status}
+        status={online_shop_status}
       />
     );
   }

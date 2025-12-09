@@ -7,6 +7,7 @@ import {
   SidebarNavigation,
 } from './components';
 import { AuthProvider } from '@/contexts';
+import { cn } from '@/lib/utils';
 
 const SIDEBAR_STATE_KEY = 'sidebar-is-open';
 
@@ -92,7 +93,17 @@ export default function DashboardLayout({
             />
             <main className="flex-1 pb-20 md:pb-0">
               <div
-                className={`rounded-xl shadow-sm min-h-[calc(100vh-12rem)] ${isOpen ? 'md:px-15 px-4' : 'md:px-44 px-4'}`}
+                className={cn(
+                  'rounded-xl shadow-sm min-h-[calc(100vh-12rem)]',
+
+                  'px-4',
+
+                  'sm:px-6',
+
+                  isOpen
+                    ? 'md:px-8 lg:px-12 xl:px-16 2xl:px-20'
+                    : 'md:px-12 lg:px-16 xl:px-26 2xl:px-32'
+                )}
               >
                 {children}
               </div>

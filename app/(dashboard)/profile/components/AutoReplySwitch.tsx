@@ -32,7 +32,7 @@ function AutoReplySwitch({
       online_shop_auto_reply_enabled: !isAutoReplyEnabled,
     });
   };
-  const isDisabled = shopStatus !== 4;
+  const isDisabled = shopStatus !== 5;
 
   return (
     <div
@@ -53,7 +53,9 @@ function AutoReplySwitch({
           <Bot
             className={cn(
               'h-4 w-4 sm:h-5 sm:w-5 text-primary',
-              !isDisabled && isAutoReplyEnabled ? 'text-green-500' : 'text-red-500'
+              !isDisabled && isAutoReplyEnabled
+                ? 'text-green-500'
+                : 'text-red-500'
             )}
           />
         </div>

@@ -18,6 +18,14 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
     return 'pending';
   };
 
+  const progressWidth =
+    steps.length > 1
+      ? Math.min(
+          100,
+          Math.max(0, ((currentStatus - 1) / (steps.length - 1)) * 100)
+        )
+      : 0;
+
   // Scroll to current step on mount and status change
   useEffect(() => {
     if (scrollContainerRef.current && stepRefs.current[currentStatus - 1]) {
@@ -42,14 +50,15 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
     <div className="md:hidden relative h-[150px] flex items-center justify-center">
       {/* Horizontal Scrollable Container */}
       <div ref={scrollContainerRef} className="overflow-x-auto">
-        <div className="relative flex">
+        <div
+          className="relative flex gap-8 px-4"
+          style={{ minWidth: `${steps.length * 160}px` }}
+        >
           {/* Progress Line */}
-          <div className="absolute top-9 right-9 left-0 h-0.5 bg-border/50 w-[600px]">
+          <div className="absolute top-9 left-0 right-0 h-0.5 bg-border/50">
             <div
               className="h-full bg-accent transition-all duration-700 ease-out rounded px-4"
-              style={{
-                width: `${((currentStatus - 1) / (steps.length - 1)) * 100}%`,
-              }}
+              style={{ width: `${progressWidth}%` }}
             />
           </div>
 

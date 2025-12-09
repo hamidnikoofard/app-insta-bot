@@ -5,6 +5,7 @@ import {
   PendingApprovalStep,
   InstagramAccessStep,
   SuccessStep,
+  CompleteInformationStep,
 } from './index';
 import { useAuth } from '@/contexts';
 
@@ -13,7 +14,7 @@ export function DashboardContent() {
 
   return (
     <div className="w-full min-h-full py-8 ">
-      {online_shop_status !== 4 && (
+      {online_shop_status !== 5 && (
         <div className="mb-8">
           <StepNavigator currentStatus={online_shop_status} />
         </div>
@@ -27,6 +28,8 @@ export function DashboardContent() {
         ) : online_shop_status === 3 ? (
           <InstagramAccessStep />
         ) : online_shop_status === 4 ? (
+          <CompleteInformationStep />
+        ) : online_shop_status === 5 ? (
           <SuccessStep />
         ) : null}
       </div>

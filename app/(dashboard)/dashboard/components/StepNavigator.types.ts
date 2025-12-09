@@ -1,4 +1,10 @@
-import { Instagram, Clock, ExternalLink, PartyPopper } from 'lucide-react';
+import {
+  Instagram,
+  Clock,
+  ExternalLink,
+  PartyPopper,
+  User,
+} from 'lucide-react';
 
 export interface Step {
   id: number;
@@ -28,6 +34,12 @@ export const steps: Step[] = [
   },
   {
     id: 4,
+    title: 'تکمیل اطلاعات',
+    description: 'اطلاعات خود را تکمیل کنید',
+    icon: User,
+  },
+  {
+    id: 5,
     title: 'اتصال موفق',
     description: 'پیج شما با موفقیت ثبت شد',
     icon: PartyPopper,

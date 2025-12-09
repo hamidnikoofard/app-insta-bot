@@ -8,19 +8,15 @@ import {
   DialogTrigger,
   Input,
   Label,
-  DialogFooter,
   DialogDescription,
 } from '@/components/ui';
 import { useAuth } from '@/contexts';
-import { API_BASE_URL } from '@/lib/fetch';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Edit2 } from 'lucide-react';
+import { Edit2, IdCard, Store, User, UserCircle, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import { z } from 'zod';
-import { useQueryClient } from '@/app/QueryProvider';
-import { formatPhoneNumber } from '@/lib/utils';
+import { useUpdateUserInfo } from '@/hooks/useUpdateUserInfo';
 
 const editProfileSchema = z.object({
   last_name: z.string().min(1, { message: 'نام خانوادگی الزامی است' }),
@@ -33,34 +29,24 @@ const editProfileSchema = z.object({
 function EditProfileButton() {
   const [open, setOpen] = useState(false);
   const { last_name, first_name, online_shop_shop_name } = useAuth();
-  const queryClient = useQueryClient();
+  const { updateUserInfo } = useUpdateUserInfo({
+    onSuccess: () => setOpen(false),
+  });
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm<z.infer<typeof editProfileSchema>>({
+    defaultValues: {
+      last_name,
+      first_name,
+      online_shop_shop_name,
+    },
     resolver: zodResolver(editProfileSchema),
   });
   const onSubmit = async (data: z.infer<typeof editProfileSchema>) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/users/info/`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-      });
-      if (!response.ok) {
-        throw new Error('Failed to update profile');
-      }
-      toast.success('اطلاعات با موفقیت ویرایش شد');
-      setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ['user'] });
-    } catch (error: any) {
-      toast.error(error.message);
-    }
+    await updateUserInfo(data);
   };
 
   useEffect(() => {
@@ -71,111 +57,121 @@ function EditProfileButton() {
         online_shop_shop_name,
       });
     }
-  }, [open, last_name, first_name, online_shop_shop_name, reset]);
+  }, [open, reset, last_name, first_name, online_shop_shop_name]);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="flex items-center gap-2">
           <Edit2 className="h-4 w-4" />
-          ویرایش
+          <span>ویرایش</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-right">ویرایش</DialogTitle>
-        </DialogHeader>
-        <DialogDescription className="text-right">
-          اطلاعات حساب کاربری خود را ویرایش کنید
-        </DialogDescription>
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-          <div className="space-y-6">
-            {/* Personal Information Section */}
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="first_name"
-                    className="text-sm font-medium text-foreground"
-                  >
-                    نام
-                  </Label>
-                  <Input
-                    id="first_name"
-                    {...register('first_name')}
-                    className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-                    placeholder="نام خود را وارد کنید"
-                  />
-                  <div className="min-h-[20px] flex items-start">
-                    {errors.first_name && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-1 duration-200">
-                        {errors.first_name.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="last_name"
-                    className="text-sm font-medium text-foreground"
-                  >
-                    نام خانوادگی
-                  </Label>
-                  <Input
-                    id="last_name"
-                    {...register('last_name')}
-                    className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-                    placeholder="نام خانوادگی خود را وارد کنید"
-                  />
-                  <div className="min-h-[20px] flex items-start">
-                    {errors.last_name && (
-                      <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-1 duration-200">
-                        {errors.last_name.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
+      <DialogContent className="sm:max-w-[500px]">
+        <DialogHeader className="space-y-3 pb-4 border-b border-border">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary">
+              <UserCircle className="h-5 w-5" />
             </div>
-
-            {/* Shop Information Section */}
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="online_shop_shop_name"
-                  className="text-sm font-medium text-foreground"
-                >
-                  نام فروشگاه
-                </Label>
-                <Input
-                  id="online_shop_shop_name"
-                  {...register('online_shop_shop_name')}
-                  className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
-                  placeholder="نام فروشگاه خود را وارد کنید"
-                />
-                <div className="min-h-[20px] flex items-start">
-                  {errors.online_shop_shop_name && (
-                    <p className="text-sm text-destructive animate-in fade-in slide-in-from-top-1 duration-200">
-                      {errors.online_shop_shop_name.message}
-                    </p>
-                  )}
-                </div>
-              </div>
+            <div className="flex-1">
+              <DialogTitle className="text-right text-xl font-bold">
+                ویرایش پروفایل
+              </DialogTitle>
+              <DialogDescription className="text-right text-sm text-muted-foreground mt-1">
+                اطلاعات حساب کاربری خود را ویرایش کنید
+              </DialogDescription>
             </div>
           </div>
-
-          <DialogFooter className="flex flex-row-reverse justify-start gap-3 mt-8 pt-6 border-t border-border">
-            <Button type="submit" className="min-w-[100px]">
-              ذخیره تغییرات
-            </Button>
+        </DialogHeader>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <Label
+                htmlFor="first_name"
+                className="flex items-center gap-2 text-sm font-semibold"
+              >
+                <User className="h-4 w-4 text-primary" />
+                <span>نام</span>
+              </Label>
+              <div className="relative">
+                <User className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <Input
+                  id="first_name"
+                  {...register('first_name')}
+                  className="pr-10"
+                  placeholder="نام خود را وارد کنید"
+                />
+              </div>
+              {errors.first_name && (
+                <p className="text-sm text-destructive mt-1.5 flex items-center gap-1.5">
+                  <span className="text-destructive">•</span>
+                  {errors.first_name.message}
+                </p>
+              )}
+            </div>
+            <div className="space-y-3">
+              <Label
+                htmlFor="last_name"
+                className="flex items-center gap-2 text-sm font-semibold"
+              >
+                <IdCard className="h-4 w-4 text-primary" />
+                <span>نام خانوادگی</span>
+              </Label>
+              <div className="relative">
+                <IdCard className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <Input
+                  id="last_name"
+                  {...register('last_name')}
+                  className="pr-10"
+                  placeholder="نام خانوادگی خود را وارد کنید"
+                />
+              </div>
+              {errors.last_name && (
+                <p className="text-sm text-destructive mt-1.5 flex items-center gap-1.5">
+                  <span className="text-destructive">•</span>
+                  {errors.last_name.message}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="space-y-3">
+            <Label
+              htmlFor="online_shop_shop_name"
+              className="flex items-center gap-2 text-sm font-semibold"
+            >
+              <Store className="h-4 w-4 text-primary" />
+              <span>نام فروشگاه</span>
+            </Label>
+            <div className="relative">
+              <Store className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              <Input
+                id="online_shop_shop_name"
+                {...register('online_shop_shop_name')}
+                className="pr-10"
+                placeholder="نام فروشگاه خود را وارد کنید"
+              />
+            </div>
+            {errors.online_shop_shop_name && (
+              <p className="text-sm text-destructive mt-1.5 flex items-center gap-1.5">
+                <span className="text-destructive">•</span>
+                {errors.online_shop_shop_name.message}
+              </p>
+            )}
+          </div>
+          <div className="flex items-center gap-3 pt-2">
             <Button
               type="button"
               variant="outline"
               onClick={() => setOpen(false)}
-              className="min-w-[100px]"
+              className="flex-1"
             >
-              انصراف
+              <X className="h-4 w-4" />
+              <span>انصراف</span>
             </Button>
-          </DialogFooter>
+            <Button type="submit" className="flex-1">
+              <Edit2 className="h-4 w-4" />
+              <span>ذخیره تغییرات</span>
+            </Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

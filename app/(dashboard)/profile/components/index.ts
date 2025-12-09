@@ -5,3 +5,5 @@ export * from './ProfileSummaryCard';
 export * from './InfoItem';
 export * from './AddShopButton';
 export * from './EditProfileButton';
+export * from './AutoReplySwitch';
+export * from './EditSettingsDialog';

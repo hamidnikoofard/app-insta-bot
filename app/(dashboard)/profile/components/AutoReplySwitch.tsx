@@ -43,8 +43,8 @@ function AutoReplySwitch({
       )}
     >
       <div className="flex items-center justify-center shrink-0">
-        <div className="p-2 sm:p-2.5 bg-primary/10 rounded-lg border border-primary/20">
-          <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+        <div className={cn('p-2 sm:p-2.5 bg-primary/10 rounded-lg border border-primary/20', isAutoReplyEnabled ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20')}>
+          <Bot className={cn('h-4 w-4 sm:h-5 sm:w-5 text-primary', isAutoReplyEnabled ? 'text-green-500' : 'text-red-500')} />
         </div>
       </div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
@@ -54,6 +54,11 @@ function AutoReplySwitch({
             className="text-sm sm:text-sm font-medium text-foreground cursor-pointer"
           >
             <span>فعال‌سازی پاسخ خودکار</span>
+            {isAutoReplyEnabled ? (
+              <span className="text-green-500 text-xs">فعال</span>
+            ) : (
+              <span className="text-red-500 text-xs">غیرفعال</span>
+            )}
           </Label>
           <p className="text-xs text-muted-foreground leading-relaxed">
             <span className="hidden sm:inline">

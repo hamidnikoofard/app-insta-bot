@@ -3,7 +3,6 @@ import { Label, Switch } from '@/components/ui';
 import { Bot } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { toast } from 'sonner';
 import { useUpdateUserInfo } from '@/hooks/useUpdateUserInfo';
 
 type AutoReplySwitchProps = {
@@ -43,8 +42,20 @@ function AutoReplySwitch({
       )}
     >
       <div className="flex items-center justify-center shrink-0">
-        <div className={cn('p-2 sm:p-2.5 bg-primary/10 rounded-lg border border-primary/20', isAutoReplyEnabled ? 'bg-green-500/10 border-green-500/20' : 'bg-red-500/10 border-red-500/20')}>
-          <Bot className={cn('h-4 w-4 sm:h-5 sm:w-5 text-primary', isAutoReplyEnabled ? 'text-green-500' : 'text-red-500')} />
+        <div
+          className={cn(
+            'p-2 sm:p-2.5 bg-primary/10 rounded-lg border border-primary/20',
+            !isDisabled && isAutoReplyEnabled
+              ? 'bg-green-500/10 border-green-500/20'
+              : 'bg-red-500/10 border-red-500/20'
+          )}
+        >
+          <Bot
+            className={cn(
+              'h-4 w-4 sm:h-5 sm:w-5 text-primary',
+              !isDisabled && isAutoReplyEnabled ? 'text-green-500' : 'text-red-500'
+            )}
+          />
         </div>
       </div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 w-full min-w-0">
@@ -54,7 +65,7 @@ function AutoReplySwitch({
             className="text-sm sm:text-sm font-medium text-foreground cursor-pointer"
           >
             <span>فعال‌سازی پاسخ خودکار</span>
-            {isAutoReplyEnabled ? (
+            {!isDisabled && isAutoReplyEnabled ? (
               <span className="text-green-500 text-xs">فعال</span>
             ) : (
               <span className="text-red-500 text-xs">غیرفعال</span>
@@ -73,7 +84,7 @@ function AutoReplySwitch({
         <div className="flex items-center justify-end sm:justify-start shrink-0 self-end sm:self-auto">
           <Switch
             id="online_shop_auto_reply_enabled"
-            checked={isAutoReplyEnabled}
+            checked={isAutoReplyEnabled && !isDisabled}
             disabled={isDisabled}
             onCheckedChange={() => onSubmit()}
             className="shrink-0"

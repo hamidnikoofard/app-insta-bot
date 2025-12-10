@@ -6,7 +6,7 @@ import { Loading } from '@/components/ui';
 import { useAuth } from '@/contexts';
 
 const STATUS_CONFIG: Record<number, () => React.ReactElement | null> = {
-  4: () => (
+  5: () => (
     <Suspense
       fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
     >
@@ -31,6 +31,13 @@ const STATUS_CONFIG: Record<number, () => React.ReactElement | null> = {
     <AccessDenied
       title="پیج اینستاگرام شما وصل نشده است"
       description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید و یا پیج شما تایید نشده است"
+      status={3}
+    />
+  ),
+  4: () => (
+    <AccessDenied
+      title="اطالاعات خود را هنوز تکمیل نکرده اید"
+      description="برای دسترسی به این صفحه ابتدا باید اطلاعات خود را تکمیل کنید"
       status={3}
     />
   ),

@@ -63,7 +63,7 @@ function AddProductPageContent() {
     );
   }
 
-  if (online_shop_status !== 4) {
+  if (online_shop_status !== 5) {
     return (
       <AccessDenied
         title="پیج اینستاگرام شما وصل نشده است"

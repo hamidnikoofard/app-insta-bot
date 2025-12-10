@@ -26,39 +26,18 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
         )
       : 0;
 
-  // Scroll to current step on mount and status change
-  useEffect(() => {
-    if (scrollContainerRef.current && stepRefs.current[currentStatus - 1]) {
-      const currentStepElement = stepRefs.current[currentStatus - 1];
-      const container = scrollContainerRef.current;
-
-      if (currentStepElement) {
-        const stepLeft = currentStepElement.offsetLeft;
-        const stepWidth = currentStepElement.offsetWidth;
-        const containerWidth = container.offsetWidth;
-        const scrollPosition = stepLeft - containerWidth / 2 + stepWidth / 2;
-
-        container.scrollTo({
-          left: scrollPosition,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [currentStatus]);
-
   return (
     <div className="md:hidden relative h-[150px] flex items-center justify-center">
       {/* Horizontal Scrollable Container */}
-      <div ref={scrollContainerRef} className="overflow-x-auto">
-        <div
-          className="relative flex gap-8 px-4"
-          style={{ minWidth: `${steps.length * 160}px` }}
-        >
+      <div ref={scrollContainerRef} className="overflow-x-auto w-full px-2">
+        <div className="relative flex gap-6 px-4 min-w-max">
           {/* Progress Line */}
-          <div className="absolute top-9 left-0 right-0 h-0.5 bg-border/50">
+          <div className="absolute top-9 left-4 right-4 h-0.5 bg-border/50">
             <div
               className="h-full bg-accent transition-all duration-700 ease-out rounded px-4"
-              style={{ width: `${progressWidth}%` }}
+              style={{
+                width: `${progressWidth}%`,
+              }}
             />
           </div>
 
@@ -76,8 +55,7 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
                   stepRefs.current[index] = el;
                 }}
                 className={cn(
-                  'flex flex-col items-center justify-start relative z-10 shrink-0 py-2'
-                  // Each step takes 50% of screen width (2 steps visible)
+                  'flex flex-col items-center justify-start relative z-10 shrink-0 py-2 min-w-[160px]'
                 )}
               >
                 {/* Icon Circle */}

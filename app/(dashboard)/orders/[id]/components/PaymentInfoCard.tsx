@@ -13,6 +13,7 @@ import {
 import { CheckCircle, XCircle } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { formatPrice } from '../../utils/formatters';
+import { Button } from '@/components/ui';
 
 interface PaymentInfoCardProps {
   payment: Order['payment'] | null;

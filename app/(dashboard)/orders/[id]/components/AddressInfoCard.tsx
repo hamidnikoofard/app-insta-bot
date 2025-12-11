@@ -7,9 +7,10 @@ import { EmptyState } from '@/app/(dashboard)/products/components';
 
 interface AddressInfoCardProps {
   address: customer_address;
+  orderId: number;
 }
 
-function AddressInfoCard({ address }: AddressInfoCardProps) {
+function AddressInfoCard({ address, orderId }: AddressInfoCardProps) {
   if (!address) {
     return (
       <EmptyState
@@ -20,7 +21,7 @@ function AddressInfoCard({ address }: AddressInfoCardProps) {
   }
   return (
     <div className="relative  border border-border rounded-xl bg-card shadow-sm w-full lg:flex-1">
-      <AddressInfoCardHeader />
+      <AddressInfoCardHeader orderId={orderId} />
       <div className=" space-y-2">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-2">
           <AddressInfoItem

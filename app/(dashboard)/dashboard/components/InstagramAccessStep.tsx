@@ -29,7 +29,6 @@ function InstagramAccessStep() {
       />
     );
   const handleOpenInstagram = () => {
-    // Open Instagram in a new tab
     window.open(
       instagramAuthUrlData?.data?.instagram_auth_url,
       'instagram-auth'

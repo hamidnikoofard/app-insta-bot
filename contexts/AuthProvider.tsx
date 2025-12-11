@@ -13,6 +13,8 @@ interface AuthContextType {
   online_shop_instagram_username: string;
   online_shop_shop_name: string;
   online_shop_status: number;
+  online_shop_is_added_to_meta: boolean;
+  online_shop_is_tester_accepted: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -22,6 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     url: 'users/info/',
     queryKey: ['user'],
   });
+  console.log(data);
   if (isLoading)
     return (
       <Loading isLoading={isLoading} message="در حال دریافت اطلاعات کاربر..." />

@@ -49,7 +49,10 @@ function OrderDetailsPage() {
         <div className="flex flex-col lg:flex-row items-stretch gap-4">
           <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
             <OrderInfoCard order={orderData.data} />
-            <AddressInfoCard address={orderData.data.customer_address} />
+            <AddressInfoCard
+              address={orderData.data.customer_address}
+              orderId={Number(id)}
+            />
           </div>
           <div className="w-full lg:w-auto lg:flex-1 flex flex-col gap-4">
             <PaymentInfoCard

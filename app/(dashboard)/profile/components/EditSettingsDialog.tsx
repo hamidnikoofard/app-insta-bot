@@ -54,7 +54,7 @@ function EditSettingsDialog({
       online_shop_instagram_username,
     },
   });
-  const isDisabled = online_shop_status === 4;
+  const isDisabled = online_shop_status === 5;
   const onSubmit = async (data: z.infer<typeof editSettingsSchema>) => {
     await updateUserInfo(data);
   };

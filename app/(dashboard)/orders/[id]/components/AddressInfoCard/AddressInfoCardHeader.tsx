@@ -18,7 +18,7 @@ export function AddressInfoCardHeader({ orderId }: AddressInfoCardHeaderProps) {
   const handleDirectCustomer = async () => {
     setIsLoading(true);
     const response = await fetch(
-      `${API_BASE_URL}/bot/customer-username/${orderId}`,
+      `${API_BASE_URL}/bot/customer-username/${orderId}/`,
       {
         credentials: 'include',
       }

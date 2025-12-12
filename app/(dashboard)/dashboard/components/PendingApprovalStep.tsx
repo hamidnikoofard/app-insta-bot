@@ -46,13 +46,14 @@ function PendingApprovalStep() {
             </p>
             <Button
               variant="outline"
-             
               onClick={() => {
                 const url = new URL(
                   'https://www.instagram.com/accounts/manage_access/'
                 );
-                // Open in the same tab to avoid spawning a new one.
-                window.open(`${url.toString()}` , '_blank') ;
+                // Add cache-busting parameter to force fresh request
+                url.searchParams.set('_t', Date.now().toString());
+
+                window.open(url.toString(), '_blank', 'noopener,noreferrer');
               }}
             >
               قبول درخواست استفاده از سرویس

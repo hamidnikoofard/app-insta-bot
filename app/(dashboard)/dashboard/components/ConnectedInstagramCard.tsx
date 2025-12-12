@@ -42,7 +42,7 @@ function ConnectedInstagramCard({
         زیر استفاده کنید.
       </p>
 
-      <AlertDialog>
+      {/* <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button
             size="sm"
@@ -70,7 +70,7 @@ function ConnectedInstagramCard({
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog>
+      </AlertDialog> */}
     </div>
   );
 }

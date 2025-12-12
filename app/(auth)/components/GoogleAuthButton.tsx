@@ -13,7 +13,7 @@ export function GoogleAuthButton({ text }: GoogleAuthButtonProps) {
     <>
       <hr className="my-6" />
       <div className="flex flex-col items-center justify-center">
-        <Button variant="outline" size="lg" className="w-full">
+        {/* <Button variant="outline" size="lg" className="w-full">
           <Image
             src="/google-icon-logo-svgrepo-com.svg"
             alt="google"
@@ -21,7 +21,7 @@ export function GoogleAuthButton({ text }: GoogleAuthButtonProps) {
             height={20}
           />
           <span className="font-semibold">{text}</span>
-        </Button>
+        </Button> */}
         <Button variant="outline" className="w-full mt-2" size="lg">
           <Link href="/">باز گشت به صفحه اصلی</Link>
         </Button>

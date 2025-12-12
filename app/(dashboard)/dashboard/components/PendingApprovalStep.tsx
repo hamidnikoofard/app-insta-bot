@@ -50,8 +50,6 @@ function PendingApprovalStep() {
                 const url = new URL(
                   'https://www.instagram.com/accounts/manage_access/'
                 );
-                // Add cache-busting parameter to force fresh request
-                url.searchParams.set('_t', Date.now().toString());
 
                 window.open(url.toString(), '_blank', 'noopener,noreferrer');
               }}

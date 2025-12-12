@@ -52,7 +52,7 @@ function PendingApprovalStep() {
                   'https://www.instagram.com/accounts/manage_access/'
                 );
                 // Open in the same tab to avoid spawning a new one.
-                window.location.href = url.toString();
+                window.open(`${url.toString()}` , '_blank') ;
               }}
             >
               قبول درخواست استفاده از سرویس

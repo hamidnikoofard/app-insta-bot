@@ -30,7 +30,7 @@ function PendingApprovalStep() {
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold text-card-foreground mb-3">
               پیچ شما با موفقیت در متا ثبت شد
             </h1>
@@ -46,6 +46,7 @@ function PendingApprovalStep() {
             </p>
             <Button
               variant="outline"
+             
               onClick={() => {
                 const url = new URL(
                   'https://www.instagram.com/accounts/manage_access/'

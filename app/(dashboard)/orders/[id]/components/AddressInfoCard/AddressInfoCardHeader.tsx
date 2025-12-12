@@ -15,6 +15,7 @@ interface CustomerUsernameResponse {
 }
 export function AddressInfoCardHeader({ orderId }: AddressInfoCardHeaderProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   const handleDirectCustomer = async () => {
     setIsLoading(true);
     const response = await fetch(
@@ -32,10 +33,10 @@ export function AddressInfoCardHeader({ orderId }: AddressInfoCardHeaderProps) {
     const directUrl = `https://ig.me/m/${data.customer_username}`;
     const profileUrl = `https://instagram.com/${data.customer_username}`;
 
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
 
     if (isMobile) {
-      window.open(directUrl, '_blank');
+      window.location.href = directUrl;
     } else {
       window.open(profileUrl, '_blank');
     }
@@ -63,7 +64,7 @@ export function AddressInfoCardHeader({ orderId }: AddressInfoCardHeaderProps) {
         ) : (
           <MessageCircle className="w-4 h-4" />
         )}{' '}
-        دایرکت مشتری
+        {isMobile ? 'دایرکت مشتری' : 'پیج مشتری'}
       </Button>
     </div>
   );

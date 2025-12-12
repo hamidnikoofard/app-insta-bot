@@ -6,7 +6,7 @@ import { Loading } from '@/components/ui';
 import { useAuth } from '@/contexts';
 
 const STATUS_CONFIG: Record<number, () => React.ReactElement | null> = {
-  4: () => (
+  5: () => (
     <Suspense
       fallback={<Loading isLoading={true} message="در حال بارگذاری..." />}
     >
@@ -34,13 +34,19 @@ const STATUS_CONFIG: Record<number, () => React.ReactElement | null> = {
       status={3}
     />
   ),
+  4: () => (
+    <AccessDenied
+      title="اطالاعات خود را هنوز تکمیل نکرده اید"
+      description="برای دسترسی به این صفحه ابتدا باید اطلاعات خود را تکمیل کنید"
+      status={3}
+    />
+  ),
 };
 
 function OrdersPageContent() {
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
+  const { online_shop_status } = useAuth();
 
-  const renderContent = STATUS_CONFIG[status];
+  const renderContent = STATUS_CONFIG[online_shop_status];
   return renderContent ? renderContent() : null;
 }
 

@@ -1,11 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import {
-  useProductForm,
-  useProductFetch,
-  useProductSubmit,
-  useImageManager,
-} from '../hooks';
+import { useProductForm, useProductFetch, useProductSubmit } from '../hooks';
 import {
   PageHeader,
   BasicInformationSection,
@@ -21,8 +16,7 @@ function AddProductPageContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
   const isEditMode = !!id;
-  const { online_shop } = useAuth();
-  const { status } = online_shop;
+  const { online_shop_status } = useAuth();
 
   // Form management
   const {
@@ -35,13 +29,18 @@ function AddProductPageContent() {
     setStockDisplay,
     setUniqueNameDisplay,
     uniqueNameDisplay,
+    selectedImages,
+    existingImages,
+    addImages,
+    removeImage,
+    removeExistingImage,
+    setExistingImages,
+    handleSubmitWithImages,
+    setSelectedImages,
   } = useProductForm();
 
-  const { register, handleSubmit, formState, setValue, reset } = form;
+  const { register, formState, setValue, reset } = form;
   const { errors } = formState;
-
-  // Image management
-  const imageManager = useImageManager();
 
   // Fetch product data for editing
   const { loading } = useProductFetch({
@@ -51,7 +50,8 @@ function AddProductPageContent() {
     setFinalCostDisplay,
     setStockDisplay,
     setUniqueNameDisplay,
-    setExistingImages: imageManager.setExistingImages,
+    setExistingImages,
+    setSelectedImages,
   });
 
   // Submit handler
@@ -63,12 +63,12 @@ function AddProductPageContent() {
     );
   }
 
-  if (status !== 4) {
+  if (online_shop_status !== 5) {
     return (
       <AccessDenied
         title="پیج اینستاگرام شما وصل نشده است"
         description="برای دسترسی به این صفحه ابتدا باید پیج اینستاگرام خود را به سیستم وصل کنید"
-        status={status}
+        status={online_shop_status}
       />
     );
   }
@@ -79,7 +79,7 @@ function AddProductPageContent() {
 
       <div className="bg-card border border-border rounded-xl sm:rounded-2xl shadow-sm overflow-hidden">
         <form
-          onSubmit={handleSubmit(submitProduct)}
+          onSubmit={handleSubmitWithImages(submitProduct)}
           className="p-4 sm:p-6 lg:p-8"
         >
           <div className="space-y-6 sm:space-y-8">
@@ -105,10 +105,11 @@ function AddProductPageContent() {
             />
 
             <ImagesSection
-              selectedImages={imageManager.selectedImages}
-              existingImages={imageManager.existingImages}
-              onImageChange={imageManager.addImages}
-              onRemoveImage={imageManager.removeImage}
+              selectedImages={selectedImages}
+              existingImages={existingImages}
+              onImageChange={addImages}
+              onRemoveImage={removeImage}
+              onRemoveExistingImage={removeExistingImage}
             />
 
             <FormActions isEditMode={isEditMode} pending={pending} />

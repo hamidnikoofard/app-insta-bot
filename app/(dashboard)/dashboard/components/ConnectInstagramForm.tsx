@@ -5,14 +5,18 @@ import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { API_BASE_URL } from '@/lib/fetch';
+import { toast } from 'sonner';
+import { useQueryClient } from '@/app/QueryProvider';
 
 const connectInstagramSchema = z.object({
-  instagram_username: z
+  online_shop_instagram_username: z
     .string()
     .min(1, { message: 'نام کاربری پیج الزامی است' }),
 });
 
 function ConnectInstagramForm() {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -22,9 +26,30 @@ function ConnectInstagramForm() {
     resolver: zodResolver(connectInstagramSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof connectInstagramSchema>) => {
-    reset();
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof connectInstagramSchema>) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/users/info/`, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to connect Instagram', {
+          cause: response.statusText,
+        });
+      }
+      const result = await response.json();
+      console.log(result);
+      toast.success('اتصال با موفقیت انجام شد');
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      reset();
+    } catch (error) {
+      console.log(error);
+      toast.error('خطا در اتصال به اینستاگرام');
+    }
   };
   return (
     <div className="w-full h-full flex items-center justify-center p-4">
@@ -53,16 +78,16 @@ function ConnectInstagramForm() {
             placeholder="نام کاربری پیج شما (مثال: myshop.ir)"
             dir="ltr"
             className="w-full rounded-xl px-4 py-3 h-auto text-right"
-            {...register('instagram_username')}
+            {...register('online_shop_instagram_username')}
             onChange={(e) => {
               const value = e.target.value;
               const cleaned = value.replace(/[^a-zA-Z0-9._]/g, '');
               e.target.value = cleaned;
             }}
           />
-          {errors.instagram_username && (
+          {errors.online_shop_instagram_username && (
             <p className="text-sm text-destructive mt-0.5">
-              {errors.instagram_username.message}
+              {errors.online_shop_instagram_username.message}
             </p>
           )}
 

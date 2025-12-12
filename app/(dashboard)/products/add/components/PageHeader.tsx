@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui';
 import { ArrowLeft, Package } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PageHeaderProps {
   isEditMode: boolean;
@@ -9,6 +9,8 @@ interface PageHeaderProps {
 
 function PageHeader({ isEditMode }: PageHeaderProps) {
   const router = useRouter();
+  const newSearchParams = useSearchParams();
+  const page = newSearchParams.get('page');
 
   return (
     <div className="mb-6 sm:mb-4">
@@ -25,7 +27,7 @@ function PageHeader({ isEditMode }: PageHeaderProps) {
         </div>
         <Button
           variant="outline"
-          onClick={() => router.push('/products')}
+          onClick={() => router.push(`/products${page ? `?page=${page}` : ''}`)}
           className="flex items-center gap-2 w-full sm:w-auto shrink-0"
         >
           <ArrowLeft className="h-4 w-4" />

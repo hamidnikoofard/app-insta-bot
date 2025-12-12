@@ -1,5 +1,6 @@
-type ProductImage = {
+export type ProductImage = {
   image_url: string;
+  id: number;
 };
 
 export type Product = {

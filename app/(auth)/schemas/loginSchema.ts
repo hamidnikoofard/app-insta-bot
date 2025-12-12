@@ -1,15 +1,15 @@
 import { z } from 'zod';
+import { convertPersianToEnglish } from './registerSchema';
 
-// الگوی شماره تلفن ایرانی: باید با 0 شروع شود و 11 رقم باشد (مثل 09372221602)
-const iranianPhoneRegex = /^09\d{9}$/;
+const iranianPhoneRegex = /^(?:09\d{9}|\+989\d{9})$/;
 
 export const loginSchema = z.object({
   phone_number: z
     .string()
     .min(1, { message: 'شماره تلفن الزامی است' })
-    .regex(iranianPhoneRegex, {
-      message:
-        'شماره تلفن باید با 0 شروع شود و 11 رقم باشد (مثال: 09372221602)',
+    .transform((val) => convertPersianToEnglish(val))
+    .refine((val) => iranianPhoneRegex.test(val), {
+      message: 'شماره تلفن معتبر نیست',
     }),
   password: z
     .string()

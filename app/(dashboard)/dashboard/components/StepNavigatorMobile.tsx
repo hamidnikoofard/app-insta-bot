@@ -18,37 +18,25 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
     return 'pending';
   };
 
-  // Scroll to current step on mount and status change
-  useEffect(() => {
-    if (scrollContainerRef.current && stepRefs.current[currentStatus - 1]) {
-      const currentStepElement = stepRefs.current[currentStatus - 1];
-      const container = scrollContainerRef.current;
-
-      if (currentStepElement) {
-        const stepLeft = currentStepElement.offsetLeft;
-        const stepWidth = currentStepElement.offsetWidth;
-        const containerWidth = container.offsetWidth;
-        const scrollPosition = stepLeft - containerWidth / 2 + stepWidth / 2;
-
-        container.scrollTo({
-          left: scrollPosition,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [currentStatus]);
+  const progressWidth =
+    steps.length > 1
+      ? Math.min(
+          100,
+          Math.max(0, ((currentStatus - 1) / (steps.length - 1)) * 100)
+        )
+      : 0;
 
   return (
     <div className="md:hidden relative h-[150px] flex items-center justify-center">
       {/* Horizontal Scrollable Container */}
-      <div ref={scrollContainerRef} className="overflow-x-auto">
-        <div className="relative flex">
+      <div ref={scrollContainerRef} className="overflow-x-auto w-full px-2">
+        <div className="relative flex gap-6 px-4 min-w-max">
           {/* Progress Line */}
-          <div className="absolute top-9 right-9 left-0 h-0.5 bg-border/50 w-[600px]">
+          <div className="absolute top-9 left-4 right-4 h-0.5 bg-border/50">
             <div
               className="h-full bg-accent transition-all duration-700 ease-out rounded px-4"
               style={{
-                width: `${((currentStatus - 1) / (steps.length - 1)) * 100}%`,
+                width: `${progressWidth}%`,
               }}
             />
           </div>
@@ -67,8 +55,7 @@ function StepNavigatorMobile({ currentStatus }: StepNavigatorMobileProps) {
                   stepRefs.current[index] = el;
                 }}
                 className={cn(
-                  'flex flex-col items-center justify-start relative z-10 shrink-0 py-2'
-                  // Each step takes 50% of screen width (2 steps visible)
+                  'flex flex-col items-center justify-start relative z-10 shrink-0 py-2 min-w-[160px]'
                 )}
               >
                 {/* Icon Circle */}

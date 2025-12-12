@@ -19,3 +19,12 @@ export const formatDate = (dateString: string) => {
     return dateString;
   }
 };
+
+export const formatPhoneNumber = (phone: string) => {
+  if (!phone) return '';
+
+  if (phone.startsWith('+98')) {
+    return '0' + phone.substring(3);
+  }
+  return phone;
+};

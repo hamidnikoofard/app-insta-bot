@@ -60,6 +60,7 @@ export function PhoneNumberInput({
         onBlur={onBlur}
         name={name}
         ref={ref}
+        dir="ltr"
       />
       {error && (
         <p className="text-sm text-destructive mt-0.5">{error.message}</p>

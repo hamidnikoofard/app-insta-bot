@@ -3,18 +3,18 @@ import { createContext, useContext } from 'react';
 import useGetData from '@/hooks/useGetData';
 import { ErrorDisplay, Loading } from '@/components/ui';
 
-type onlineShopUser = {
-  id: number;
-  instagram_username: string;
-  status: number;
-};
-
 interface AuthContextType {
   id: number;
   first_name: string;
   last_name: string;
-  online_shop: onlineShopUser;
   phone_number: string;
+  online_shop_auto_reply_enabled: boolean;
+  online_shop_card_number: string;
+  online_shop_instagram_username: string;
+  online_shop_shop_name: string;
+  online_shop_status: number;
+  online_shop_is_added_to_meta: boolean;
+  online_shop_is_tester_accepted: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     url: 'users/info/',
     queryKey: ['user'],
   });
-
+  console.log(data);
   if (isLoading)
     return (
       <Loading isLoading={isLoading} message="در حال دریافت اطلاعات کاربر..." />

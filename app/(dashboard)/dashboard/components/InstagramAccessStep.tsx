@@ -1,11 +1,38 @@
 'use client';
 import { ExternalLink, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useGetData } from '@/hooks';
+import { ErrorDisplay, Loading } from '@/components/ui';
+
+interface InstagramAccessStepProps {
+  instagram_auth_url: string;
+}
 
 function InstagramAccessStep() {
+  const {
+    data: instagramAuthUrlData,
+    isLoading,
+    error,
+  } = useGetData<InstagramAccessStepProps>({
+    url: 'bot/auth/url/',
+    queryKey: ['instagram-access-url'],
+  });
+  console.log(instagramAuthUrlData);
+  if (isLoading)
+    return <Loading isLoading={isLoading} message="در حال دریافت اطلاعات..." />;
+  if (error)
+    return (
+      <ErrorDisplay
+        error={error}
+        title="خطا در دریافت اطلاعات..."
+        onRetry={() => window.location.reload()}
+      />
+    );
   const handleOpenInstagram = () => {
-    // Open Instagram in a new tab
-    window.open('https://www.instagram.com', '_blank');
+    window.open(
+      instagramAuthUrlData?.data?.instagram_auth_url,
+      'instagram-auth'
+    );
   };
 
   return (

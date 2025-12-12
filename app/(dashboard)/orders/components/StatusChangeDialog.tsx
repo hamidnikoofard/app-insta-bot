@@ -31,11 +31,11 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
   const [open, setOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(orderStatus);
   const queryClient = useQueryClient();
-
   // همگام‌سازی selectedStatus با orderStatus وقتی prop تغییر می‌کند
   useEffect(() => {
     setSelectedStatus(orderStatus);
   }, [orderStatus]);
+
   const handleStatusChange = async (newStatus: number) => {
     try {
       const response = await fetch(`${API_BASE_URL}/bot/orders/${orderId}/`, {
@@ -50,7 +50,8 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
         throw new Error('Failed to change order status');
       }
       toast.success('وضعیت سفارش با موفقیت تغییر کرد');
-      queryClient.invalidateQueries({ queryKey: ['orders', 'order', orderId] });
+      queryClient.invalidateQueries({ queryKey: ['order', orderId] });
+      queryClient.invalidateQueries({ queryKey: ['orders'] });
       setSelectedStatus(newStatus);
       setOpen(false);
     } catch (error) {
@@ -58,11 +59,22 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
     }
   };
 
+  const shouldDisableOption = (optionValue: number) => {
+    if (orderStatus <= 3) {
+      return true;
+    }
+    const hasPassedPaymentApproval = orderStatus >= 3;
+    return hasPassedPaymentApproval && optionValue < 4;
+  };
+
+  useEffect(() => {
+    shouldDisableOption(selectedStatus);
+  }, [orderStatus]);
+
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
     if (!isOpen) setSelectedStatus(orderStatus);
   };
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -104,6 +116,7 @@ function StatusChangeDialog({ orderId, orderStatus }: StatusChangeDialogProps) {
                   value={option.value.toString()}
                   id={`status-${orderId}-${option.value}`}
                   className="cursor-pointer"
+                  disabled={shouldDisableOption(option.value)}
                 />
                 <Label
                   htmlFor={`status-${orderId}-${option.value}`}

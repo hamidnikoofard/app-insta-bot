@@ -13,3 +13,4 @@ export * from './alert-dialog';
 export * from './pagination';
 export * from './badge';
 export * from './radio-group';
+export * from './switch';

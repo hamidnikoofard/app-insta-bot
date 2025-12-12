@@ -48,7 +48,6 @@ export function usePaymentStatusChange({
       toast.error(
         error instanceof Error ? error.message : 'خطا در تغییر وضعیت پرداخت'
       );
-      console.log(error);
       return false;
     } finally {
       setPending(false);

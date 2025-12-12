@@ -53,9 +53,9 @@ function SidebarNavigation({
           'flex fixed right-0 top-0 h-screen bg-card border-l border-border/50 shadow-xl flex-col',
           'transition-all duration-300 ease-in-out',
           'md:z-30 z-50',
-          // Desktop: عرض ثابت (استفاده از مقادیر استاندارد Tailwind)
+
           isOpen ? 'md:w-[280px]' : 'md:w-18',
-          // Mobile: عرض کامل با انیمیشن slide (حدود 80% صفحه)
+
           isOpen ? 'w-[320px] max-w-[85vw]' : 'w-0 overflow-hidden'
         )}
       >

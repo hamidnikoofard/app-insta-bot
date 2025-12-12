@@ -14,32 +14,24 @@ function StepNavigatorDesktop({ currentStatus }: StepNavigatorDesktopProps) {
     return 'pending';
   };
 
+  const progressWidth =
+    steps.length > 1
+      ? Math.min(
+          100,
+          Math.max(0, ((currentStatus - 1) / (steps.length - 1)) * 100)
+        )
+      : 0;
+
   return (
     <div className="hidden md:block">
       <div className="max-w-3xl mx-auto">
         <div className="relative">
           {/* Progress Line */}
-          <div
-            className={`absolute top-6 ${currentStatus === 2 ? 'right-2' : 'right-0'} ${currentStatus === 3 ? 'left-2' : 'left-0'} h-0.5 bg-border/50`}
-          >
-            <div className="relative h-full">
-              {/* Completed Steps - Green */}
-              {currentStatus > 1 && (
-                <div
-                  className="absolute h-full bg-accent transition-all duration-700 ease-out"
-                  style={{
-                    width: `${((currentStatus - 1) / (steps.length - 1)) * 100}%`,
-                  }}
-                />
-              )}
-              {/* Progress to Current Step - Blue */}
-              <div
-                className="absolute h-full bg-accent transition-all duration-700 ease-out"
-                style={{
-                  width: `${((currentStatus - 1) / (steps.length - 1)) * 100}%`,
-                }}
-              />
-            </div>
+          <div className="absolute top-6 left-6 right-6 h-0.5 bg-border/50">
+            <div
+              className="h-full bg-accent transition-all duration-700 ease-out rounded"
+              style={{ width: `${progressWidth}%` }}
+            />
           </div>
 
           {/* Steps */}
@@ -69,6 +61,8 @@ function StepNavigatorDesktop({ currentStatus }: StepNavigatorDesktopProps) {
                           'bg-accent border-accent text-accent-foreground',
                         status === 'current' &&
                           'bg-primary border-primary text-primary-foreground shadow-lg shadow-primary/30',
+                        status === 'completed' &&
+                          'bg-accent border-accent text-accent-foreground',
                         status === 'pending' &&
                           'bg-background border-border/60 text-muted-foreground'
                       )}

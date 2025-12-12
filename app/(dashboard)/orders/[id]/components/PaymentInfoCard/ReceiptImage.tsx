@@ -1,5 +1,6 @@
 import { ImageIcon, EyeIcon } from 'lucide-react';
 import Image from 'next/image';
+
 import {
   Dialog,
   DialogContent,
@@ -33,7 +34,8 @@ function ReceiptImage({ receiptImageUrl }: ReceiptImageProps) {
                 alt="تصویر رسید پرداخت"
                 width={200}
                 height={200}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover w-full max-w-full h-full transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 100px"
                 loading="eager"
               />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
@@ -55,7 +57,6 @@ function ReceiptImage({ receiptImageUrl }: ReceiptImageProps) {
                 width={500}
                 height={500}
                 className="w-full h-full object-contain max-h-[70vh]"
-                unoptimized
               />
             </DialogDescription>
           </DialogContent>

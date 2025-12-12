@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { API_BASE_URL } from '@/lib/fetch';
-import { Product } from '../../type';
+import { Product, ProductImage } from '../../type';
 import { formatNumberWithCommas } from '../utils/formatNumber';
 import { UseFormReset } from 'react-hook-form';
 import { ProductFormData } from './useProductForm';
@@ -15,7 +15,8 @@ interface UseProductFetchProps {
   setFinalCostDisplay: (value: string) => void;
   setStockDisplay: (value: string) => void;
   setUniqueNameDisplay: (value: string) => void;
-  setExistingImages: (images: string[]) => void;
+  setExistingImages: (images: ProductImage[]) => void;
+  setSelectedImages: (images: File[]) => void;
 }
 
 export function useProductFetch({
@@ -26,6 +27,7 @@ export function useProductFetch({
   setStockDisplay,
   setUniqueNameDisplay,
   setExistingImages,
+  setSelectedImages,
 }: UseProductFetchProps) {
   const router = useRouter();
 
@@ -52,7 +54,7 @@ export function useProductFetch({
           cause: response.statusText,
         });
       }
-
+      setSelectedImages([]);
       return response.json();
     },
     enabled: !!id, // فقط زمانی که id وجود دارد query اجرا شود
@@ -95,7 +97,7 @@ export function useProductFetch({
 
     // تنظیم تصاویر موجود
     if (productData.images && productData.images.length > 0) {
-      setExistingImages(productData.images.map((img) => img.image_url));
+      setExistingImages(productData.images);
     }
   }, [
     productData,

@@ -56,7 +56,6 @@ function ItemsTabletTable({ items }: ItemsTabletTableProps) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      unoptimized={true}
                     />
                   ) : (
                     <div className="w-full h-full rounded-lg bg-muted flex items-center justify-center">
